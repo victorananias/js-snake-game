@@ -7,6 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Snake Game</title>
   <style>
+    :root {
+      --main-size: 20px;
+    }
 
     /* RESET */
     * {
@@ -31,19 +34,42 @@
     .snake-part {
       background-color: #c54c4c;
       position: absolute;
+      width: var(--main-size);
+      height: var(--main-size);
 
       text-align: center;
       font-size: 12px;
       line-height: 20px;
     }
+
+    .point {
+      width: var(--main-size);
+      height: var(--main-size);
+      position: absolute;
+      left: 100px;
+      top: 100px;
+    }
+
+    .point .point-content {
+      background-color: green;
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      margin-left: 50%;
+      margin-top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
   </style>
 </head>
 
 <body>
   <div id="container">
+    <div class="point">
+      <div class="point-content"></div>
+    </div>
+
     <div class="snake-part">1</div>
-    <div class="snake-part">2</div>
-    <div class="snake-part">3</div>
   </div>
 
   <script>
@@ -53,28 +79,22 @@
       const KEY_RIGHT = 68;
       const KEY_UP = 87;
       const KEY_DOWN = 83;
-      const PAUSE = 32;
+      const KEY_PAUSE = 32;
       const SIZE = 20;
 
-      let play = false;
+      let lastTime = new Date().getTime();
+
+      let play = true;
 
       const positions = [];
 
-      const parts = snakeBody();
-
-      for (let i = 0; i < parts.length; i++) {
-        const initialPosition = (parts.length - i - 1) * SIZE;
-        
-        parts[i].style.width = `${SIZE}px`;
-        parts[i].style.height = `${SIZE}px`;
-        parts[i].style.left = `${initialPosition}px` 
-      }
-
-      const container = document.querySelector('#container')
+      const point = document.querySelector('.point');
+      const container = document.querySelector('#container');
+      
+      const containerWidth = parseInt(getStyle(container).width);
+      const containerHeight = parseInt(getStyle(container).height);
+      
       let direction = '';
-
-      let containerWidth = parseInt(getStyle(container).width);
-      let containerHeight = parseInt(getStyle(container).height);
 
       document.addEventListener('keyup', setMovement);
 
@@ -83,7 +103,7 @@
         const snakeProps = getStyle(parts[parts.length - 1]);
         
         switch (e.keyCode) {
-          case PAUSE:
+          case KEY_PAUSE:
             play = !play
             break;
           case KEY_LEFT:
@@ -114,8 +134,6 @@
             break;
         }
       }
-
-      let lastTime = new Date().getTime();
 
       function animate() {
         if (!play) {
@@ -212,6 +230,12 @@
 
             break;
         }
+
+        checkPoint(
+          parts[0].style.left, 
+          parts[0].style.top, 
+          parts[0].style.width
+        )
       }
 
       function snakeBody() {
@@ -223,7 +247,36 @@
       }
 
       function growUp() {
+        const div = document.createElement('div')
+        div.classList.add('snake-part')
+        div.innerHTML = snakeBody().length + 1;
+        div.style.left = '-200px';
+        div.style.top = '-200px';
+        container.appendChild(div);
+      }
 
+      function repositionPoint() {
+        const x = Math.floor(Math.random() * (containerWidth / SIZE)) * SIZE;
+        const y = Math.floor(Math.random() * (containerHeight / SIZE)) * SIZE;
+        
+        point.style.left = `${x}px`;
+        point.style.top = `${y}px`;
+      }
+
+      function checkPoint(x, y, size) {
+        const pointX = getStyle(point).left;
+        const pointY = getStyle(point).top;
+
+        if (
+          x <= pointX && x + size >= pointX
+          && y <= pointY && y + size >= pointY
+        ) {
+          growUp();
+          
+          point.style.left = '-200px';
+          point.style.top = '-200px';
+          repositionPoint();
+        }
       }
 
       function reposition(el, x, y) {

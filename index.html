@@ -213,7 +213,7 @@
             break;
 
           case 'down':
-            if (y <= containerHeight) {
+            if (y + SIZE < containerHeight) {
               reposition(parts[0], x, y + SIZE);
               
               for (let i = 1; i < parts.length; i++) {

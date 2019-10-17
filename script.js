@@ -123,6 +123,22 @@ window.onload = () => {
 
   }
 
+  function checkPoint(x, y, size) {
+    const pointX = getStyle(point).left;
+    const pointY = getStyle(point).top;
+
+    if (
+      x <= pointX && x + size >= pointX
+      && y <= pointY && y + size >= pointY
+    ) {
+      score();
+      growUp();
+      speedUp();
+      hidePoint();
+      spawnPoint();
+    }
+  }
+
   function snakeBody() {
     return document.querySelectorAll('.snake-part');
   }
@@ -148,22 +164,6 @@ window.onload = () => {
     point.style.top = `${y}px`;
   }
 
-  function checkPoint(x, y, size) {
-    const pointX = getStyle(point).left;
-    const pointY = getStyle(point).top;
-
-    if (
-      x <= pointX && x + size >= pointX
-      && y <= pointY && y + size >= pointY
-    ) {
-      score();
-      growUp();
-      speedUp();
-      removePoint();
-      spawnPoint();
-    }
-  }
-
   function score() {
     scorePoints += 10;
     document.querySelector('#score #points').innerHTML = scorePoints;
@@ -173,7 +173,7 @@ window.onload = () => {
     SPEED -= 1;
   }
 
-  function removePoint() {
+  function hidePoint() {
     point.style.left = '-200px';
     point.style.top = '-200px';
   }

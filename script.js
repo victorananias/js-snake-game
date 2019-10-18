@@ -5,14 +5,15 @@ window.onload = () => {
   const KEY_DOWN = 83;
   const KEY_PAUSE = 32;
   const SIZE = 20;
-
+  
   let SPEED = 200;
-
+  
   let scorePoints = 0;
-
+  
   let lastTime = new Date().getTime();
-
-  let play = true;
+  
+  let isGameOver = false
+  let isPaused = false;
 
   const point = document.querySelector('.point');
   const container = document.querySelector('#container');
@@ -20,14 +21,14 @@ window.onload = () => {
   const containerWidth = parseInt(getStyle(container).width);
   const containerHeight = parseInt(getStyle(container).height);
 
-  let direction = '';
+  let direction = 'd';
 
   document.addEventListener('keyup', setDirection);
 
   function setDirection(e) {
     switch (e.keyCode) {
       case KEY_PAUSE:
-        play = !play
+        isPaused = !isPaused
         break;
       case KEY_LEFT:
         if (direction != 'right') {
@@ -53,7 +54,7 @@ window.onload = () => {
   }
 
   function animate() {
-    if (!play) {
+    if (isPaused || isGameOver) {
       requestAnimationFrame(animate);
       return;
     }
@@ -73,34 +74,37 @@ window.onload = () => {
 
     let x = parseInt(getStyle(parts[0]).left);
     let y = parseInt(getStyle(parts[0]).top);
-    let shouldReposition = false;
 
     if (!direction) return;
 
-    if (direction == 'left' && x - SIZE >= 0) {
+    if (direction == 'left') {
       shouldReposition = true;
       x -= SIZE;
     }
 
-    if (direction == 'right' && x + SIZE < containerWidth) {
+    if (direction == 'right') {
       shouldReposition = true;
       x += SIZE;
     }
 
-    if (direction == 'up' && y - SIZE >= 0) {
+    if (direction == 'up') {
       shouldReposition = true;
       y -= SIZE;
     }
 
-    if (direction == 'down' && y + SIZE < containerHeight) {
+    if (direction == 'down') {
       shouldReposition = true;
       y += SIZE;
     }
-    
-    if (!shouldReposition) return;
 
-    if (willCollide(x, y)) {
-      play = false;
+    if (
+      willCollide(x, y)
+        || x < 0
+        || x >= containerWidth
+        || y < 0
+        || y >= containerHeight
+      ) {
+      gameOver();
       return;
     }
 
@@ -191,6 +195,16 @@ window.onload = () => {
     el.style.top = `${y}px`;
   }
 
+  function gameOver() {
+    isGameOver = true;
+    const gameOver = document.querySelector('#game-over');
+    gameOver.style.webkitAnimationPlayState  = 'running'
+  }
+
   spawnPoint();
   animate();
+}
+
+function reload() {
+  location.reload();
 }

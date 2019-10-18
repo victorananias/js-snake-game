@@ -118,7 +118,7 @@ window.onload = () => {
       y = oldY;
     }
 
-    checkPoint(parts[0].style.left, parts[0].style.top, SIZE)
+    pointCheck(parts[0].style.left, parts[0].style.top, SIZE)
   }
 
   function willCollide(x, y) {
@@ -136,7 +136,7 @@ window.onload = () => {
     
   }
 
-  function checkPoint(x, y, size) {
+  function pointCheck(x, y, size) {
     const pointX = getStyle(point).left;
     const pointY = getStyle(point).top;
 

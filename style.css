@@ -52,6 +52,8 @@ body {
   text-align: center;
   font-size: 12px;
   line-height: 20px;
+
+  border-radius: 3px;
 }
 
 .point {

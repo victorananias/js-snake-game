@@ -22,10 +22,9 @@ window.onload = () => {
 
   let direction = '';
 
-  document.addEventListener('keyup', setMovement);
+  document.addEventListener('keyup', setDirection);
 
-  function setMovement(e) {
-
+  function setDirection(e) {
     switch (e.keyCode) {
       case KEY_PAUSE:
         play = !play
@@ -34,25 +33,21 @@ window.onload = () => {
         if (direction != 'right') {
           direction = 'left'
         }
-
         break;
       case KEY_RIGHT:
         if (direction != 'left') {
           direction = 'right'
         }
-
         break;
       case KEY_UP:
         if (direction != 'down') {
           direction = 'up'
         }
-
         break;
       case KEY_DOWN:
         if (direction != 'top') {
           direction = 'down'
         }
-
         break;
     }
   }
@@ -104,6 +99,10 @@ window.onload = () => {
     
     if (!shouldReposition) return;
 
+    if (willCollide(x, y)) {
+      play = false;
+      return;
+    }
 
     for (let i = 0; i < parts.length; i++) {
       let oldX = parseInt(parts[i].style.left);
@@ -115,12 +114,22 @@ window.onload = () => {
       y = oldY;
     }
 
-    checkPoint(
-      parts[0].style.left,
-      parts[0].style.top,
-      parts[0].style.width
-    )
+    checkPoint(parts[0].style.left, parts[0].style.top, SIZE)
+  }
 
+  function willCollide(x, y) {
+    const parts = snakeBody();
+
+    for (let i = 1; i < parts.length; i++) {
+      const part = parts[i];
+      const partX = parseInt(part.style.left);
+      const partY = parseInt(part.style.top);
+      
+      if (x == partX && y == partY) {
+        return true;
+      }
+    }
+    
   }
 
   function checkPoint(x, y, size) {
@@ -149,8 +158,7 @@ window.onload = () => {
 
   function growUp() {
     const div = document.createElement('div')
-    div.classList.add('snake-part')
-    div.innerHTML = snakeBody().length + 1;
+    div.classList.add('snake-part');
     div.style.left = '-200px';
     div.style.top = '-200px';
     container.appendChild(div);

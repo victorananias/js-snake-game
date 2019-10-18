@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
 
 /* RESET */
 * {
@@ -8,7 +8,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
 }
@@ -22,7 +23,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
   -webkit-font-smothing: antialised !important;
 }
 
@@ -74,7 +75,7 @@ body {
   transform: translate(-50%, -50%);
 }
 
-
+#pause,
 #game-over {
   width: 500px;
   height: 500px;
@@ -92,18 +93,23 @@ body {
   transform: translate(-50%, -52%);
   background-color: black;
   color: white;
-  animation: .2s gameOver ease;
+}
+
+#game-over {
+  animation: 0.2s animation1 ease;
   animation-play-state: paused;
 }
 
-#game-over .text {
+#pause {
+  display: none;
+}
+
+.text-center {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  height: 90px;
-  width: 90px;
 }
 
 #game-over .text a {
@@ -111,10 +117,11 @@ body {
   cursor: pointer;
 }
 
-@keyframes gameOver {
+@keyframes animation1 {
   from {
     top: -100%;
-  } to {
-    top: 50%
+  }
+  to {
+    top: 50%;
   }
 }

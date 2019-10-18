@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="flex-center">
   <div id="root">
     <div id="score">
       SCORE: <span id="points">0</span>
@@ -18,33 +18,34 @@
     <div id="container">
 
       <div class="point">
-        <div class="point-content"></div>
+        <div class="point-content abs-center"></div>
       </div>
 
       <div class="snake-part"></div>
     </div>
 
-    <div id="game-over">
+    <div id="game-over" class="flex-center abs-center">
       <div class="text-center">
-          GAME OVER
-          <br>
-          <a onclick="reload()">
-            Play again?
-          </a>
+        GAME OVER
+        <br>
+        <a onclick="reload()">
+          Play again?
+        </a>
       </div>
     </div>
 
-    <div id="pause">
-      <div class="text-center">
-      PAUSE
+    <div id="pause" class="abs-center">
+      <div class="text-center abs-center">
+        PAUSE
       </div>
     </div>
 
     <div>
       <p>
-        Use <strong>W</strong> <strong>A</strong> <strong>S</strong> <strong>D</strong> to move. Press <strong>SPACE</strong> to pause.</p>
+        Use <strong>W</strong> <strong>A</strong> <strong>S</strong> <strong>D</strong> to move. Press
+        <strong>SPACE</strong> to pause.</p>
       <p>
-        <strong>Move</strong> to <strong>start</strong> the game. 
+        <strong>Move</strong> to <strong>start</strong> the game.
       </p>
     </div>
   </div>

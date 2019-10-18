@@ -196,6 +196,8 @@ window.onload = () => {
   }
 
   function togglePause() {
+    if (isGameOver) return;
+    
     isPaused = !isPaused;
     const pause = document.querySelector('#pause');
     

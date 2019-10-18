@@ -11,6 +11,7 @@ window.onload = () => {
   let scorePoints = 0;
   
   let lastTime = new Date().getTime();
+  let lastClick = new Date().getTime();
   
   let isGameOver = false
   let isPaused = false;
@@ -26,6 +27,13 @@ window.onload = () => {
   document.addEventListener('keyup', setDirection);
 
   function setDirection(e) {
+    let now = new Date().getTime();
+    if (now - lastClick <= (SPEED * 0.8)) {
+      return;
+    }
+
+    lastClick = now;
+
     switch (e.keyCode) {
       case KEY_PAUSE:
         togglePause();
@@ -59,11 +67,11 @@ window.onload = () => {
       return;
     }
 
-    let agora = new Date().getTime();
+    let now = new Date().getTime();
 
-    if (agora - lastTime > SPEED) {
+    if (now - lastTime > SPEED) {
       move();
-      lastTime = agora;
+      lastTime = now;
     }
 
     requestAnimationFrame(animate);

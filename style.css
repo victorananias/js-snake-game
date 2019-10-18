@@ -71,3 +71,48 @@ body {
   margin-top: 50%;
   transform: translate(-50%, -50%);
 }
+
+
+#game-over {
+  width: 500px;
+  height: 500px;
+
+  position: fixed;
+  left: 50%;
+  top: 50%;
+
+  display: flex;
+  align-content: center;
+  justify-content: center;
+
+  opacity: 0.5;
+  z-index: 99;
+  transform: translate(-50%, -52%);
+  background-color: black;
+  color: white;
+  animation: .2s gameOver ease;
+  animation-play-state: paused;
+}
+
+#game-over .text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  height: 90px;
+  width: 90px;
+}
+
+#game-over .text a {
+  color: red;
+  cursor: pointer;
+}
+
+@keyframes gameOver {
+  from {
+    top: -100%;
+  } to {
+    top: 50%
+  }
+}

@@ -16,19 +16,23 @@ body {
 
 :root {
   --main-size: 20px;
+  --container-size: 500px;
 }
 
 body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   -webkit-font-smothing: antialised !important;
 }
 
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #root {
-  width: 500px;
+  width: var(--container-size);
 }
 
 #score {
@@ -37,8 +41,8 @@ body {
 }
 
 #container {
-  width: 500px;
-  height: 500px;
+  width: var(--container-size);
+  height: var(--container-size);
   background-color: #3a3a3a;
   position: relative;
   overflow: hidden;
@@ -46,15 +50,10 @@ body {
 
 .snake-part {
   background-color: #c54c4c;
-  position: absolute;
   width: var(--main-size);
   height: var(--main-size);
-
-  text-align: center;
-  font-size: 12px;
-  line-height: 20px;
-
   border-radius: 0.2rem;
+  position: absolute;
   left: 20%;
   top: 20%;
 }
@@ -71,29 +70,24 @@ body {
   position: absolute;
   width: 10px;
   height: 10px;
-  margin-left: 50%;
-  margin-top: 50%;
+}
+
+.abs-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
 }
 
 #pause,
 #game-over {
-  width: 500px;
-  height: 500px;
-
-  position: fixed;
-  left: 50%;
-  top: 50%;
-
-  display: flex;
-  align-content: center;
-  justify-content: center;
-
+  width: var(--container-size);
+  height: var(--container-size);
   opacity: 0.5;
   z-index: 99;
-  transform: translate(-50%, -52%);
   background-color: black;
   color: white;
+  transform: translate(-50%, -52%);
 }
 
 #game-over {
@@ -106,14 +100,10 @@ body {
 }
 
 .text-center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   text-align: center;
 }
 
-#game-over .text a {
+#game-over a {
   color: red;
   cursor: pointer;
 }

@@ -21,14 +21,14 @@ window.onload = () => {
   const containerWidth = parseInt(getStyle(container).width);
   const containerHeight = parseInt(getStyle(container).height);
 
-  let direction = 'd';
+  let direction = '';
 
   document.addEventListener('keyup', setDirection);
 
   function setDirection(e) {
     switch (e.keyCode) {
       case KEY_PAUSE:
-        isPaused = !isPaused
+        togglePause();
         break;
       case KEY_LEFT:
         if (direction != 'right') {
@@ -193,6 +193,17 @@ window.onload = () => {
   function reposition(el, x, y) {
     el.style.left = `${x}px`;
     el.style.top = `${y}px`;
+  }
+
+  function togglePause() {
+    isPaused = !isPaused;
+    const pause = document.querySelector('#pause');
+    
+    if (isPaused) {
+      pause.style.display = 'block';
+    } else {
+      pause.style.display = 'none';
+    }
   }
 
   function gameOver() {

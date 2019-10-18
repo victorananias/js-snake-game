@@ -54,7 +54,7 @@ body {
   font-size: 12px;
   line-height: 20px;
 
-  border-radius: 3px;
+  border-radius: 0.2rem;
   left: 20%;
   top: 20%;
 }
@@ -66,6 +66,7 @@ body {
 }
 
 .point .point-content {
+  border-radius: 0.2rem;
   background-color: green;
   position: absolute;
   width: 10px;

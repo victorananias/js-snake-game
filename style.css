@@ -17,6 +17,8 @@ body {
 :root {
   --main-size: 20px;
   --container-size: 500px;
+  --snake-color: #4bb84b;
+  --point-color: #c54c4c;
 }
 
 body {
@@ -49,7 +51,7 @@ body {
 }
 
 .snake-part {
-  background-color: #c54c4c;
+  background-color: var(--snake-color);
   width: var(--main-size);
   height: var(--main-size);
   border-radius: 0.2rem;
@@ -66,7 +68,7 @@ body {
 
 .point .point-content {
   border-radius: 0.2rem;
-  background-color: green;
+  background-color: var(--point-color);
   position: absolute;
   width: 10px;
   height: 10px;

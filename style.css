@@ -17,8 +17,8 @@ body {
 :root {
   --main-size: 20px;
   --container-size: 500px;
-  --snake-color: #4bb84b;
-  --point-color: #c54c4c;
+  --snake-color: #c54c4c;
+  --point-color: #4bb84b;
 }
 
 body {

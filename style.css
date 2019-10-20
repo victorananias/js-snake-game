@@ -9,20 +9,30 @@
 }
 
 html,
-body {
+body,
+#root {
   height: 100%;
   width: 100%;
 }
 
 :root {
-  --main-size: 20px;
-  --container-size: 500px;
+  --main-size: 15px;
+  --game-size: 460px;
   --snake-color: #c54c4c;
   --point-color: #4bb84b;
 }
 
+@media (min-width: 600px) 
+{
+  :root {
+    --main-size: 20px;
+    --game-size: 500px;
+    --snake-color: #c54c4c;
+    --point-color: #4bb84b;
+  }
+}
+
 body {
-  flex-direction: column;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   -webkit-font-smothing: antialised !important;
 }
@@ -34,20 +44,67 @@ body {
 }
 
 #root {
-  width: var(--container-size);
+  flex-direction: column;
 }
 
-#score {
+.container {
+  width: var(--game-size);
+  height: var(--game-size);
+  position: relative;
+}
+
+#score, #instructions {
+  width: var(--game-size);
+}
+
+#game {
   width: 100%;
-  text-align: left;
-}
-
-#container {
-  width: var(--container-size);
-  height: var(--container-size);
+  height: 100%;
   background-color: #3a3a3a;
   position: relative;
   overflow: hidden;
+}
+
+#pause,
+#game-over {
+  left: 0;
+  top: 0;
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  z-index: 99;
+  background-color: black;
+  color: white;
+}
+
+.text-center {
+  width: 100%;
+  text-align: center;
+}
+
+#game-over a {
+  color: red;
+  cursor: pointer;
+}
+
+#game-over {
+  animation: 0.2s animation1 ease;
+  animation-play-state: paused;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes animation1 {
+  from {
+    top: -200%;
+  }
+  to {
+    top: 50%;
+  }
 }
 
 .snake-part {
@@ -56,8 +113,8 @@ body {
   height: var(--main-size);
   border-radius: 0.2rem;
   position: absolute;
-  left: 20%;
-  top: 20%;
+  left: calc(var(--main-size) * 4);
+  top: calc(var(--main-size) * 4);
 }
 
 .point {
@@ -67,54 +124,9 @@ body {
 }
 
 .point .point-content {
-  border-radius: 0.2rem;
+  border-radius: 20%;
   background-color: var(--point-color);
   position: absolute;
-  width: 10px;
-  height: 10px;
-}
-
-.abs-center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-#pause,
-#game-over {
-  width: var(--container-size);
-  height: var(--container-size);
-  opacity: 0.5;
-  z-index: 99;
-  background-color: black;
-  color: white;
-  transform: translate(-50%, -52%);
-}
-
-#game-over {
-  animation: 0.2s animation1 ease;
-  animation-play-state: paused;
-}
-
-#pause {
-  display: none;
-}
-
-.text-center {
-  text-align: center;
-}
-
-#game-over a {
-  color: red;
-  cursor: pointer;
-}
-
-@keyframes animation1 {
-  from {
-    top: -100%;
-  }
-  to {
-    top: 50%;
-  }
+  width: 50%;
+  height: 50%;
 }

@@ -9,38 +9,41 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="flex-center">
-  <div id="root">
+<body>
+  <div id="root" class="flex-center">
+
     <div id="score">
       SCORE: <span id="points">0</span>
     </div>
 
-    <div id="container">
+    <div class="container">
+      <div id="game">
 
-      <div class="point">
-        <div class="point-content abs-center"></div>
+        <div class="point flex-center">
+          <div class="point-content"></div>
+        </div>
+
+        <div class="snake-part"></div>
       </div>
 
-      <div class="snake-part"></div>
-    </div>
+      <div id="game-over" class="flex-center">
+        <div class="text-center">
+          GAME OVER
+          <br>
+          <a onclick="reload()">
+            Play again?
+          </a>
+        </div>
+      </div>
 
-    <div id="game-over" class="flex-center abs-center">
-      <div class="text-center">
-        GAME OVER
-        <br>
-        <a onclick="reload()">
-          Play again?
-        </a>
+      <div id="pause" class="flex-center hidden">
+        <div class="text-center">
+          PAUSE
+        </div>
       </div>
     </div>
 
-    <div id="pause" class="abs-center">
-      <div class="text-center abs-center">
-        PAUSE
-      </div>
-    </div>
-
-    <div>
+    <div id="instructions">
       <p>
         Use <strong>W</strong> <strong>A</strong> <strong>S</strong> <strong>D</strong> to move. Press
         <strong>SPACE</strong> to pause.</p>
@@ -48,7 +51,16 @@
         <strong>Move</strong> to <strong>start</strong> the game.
       </p>
     </div>
+    
   </div>
+
+  <script>
+    document.addEventListener('click', function (e) {
+
+      console.log(e)
+
+    })
+  </script>
 
   <script src="script.js"></script>
 </body>

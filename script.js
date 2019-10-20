@@ -4,7 +4,8 @@ window.onload = () => {
   const KEY_UP = 87;
   const KEY_DOWN = 83;
   const KEY_PAUSE = 32;
-  const SIZE = 20;
+  
+  const SIZE = parseInt(getStyle(document.querySelector('.snake-part')).width);
   
   let SPEED = 200;
   
@@ -17,16 +18,17 @@ window.onload = () => {
   let isPaused = false;
 
   const point = document.querySelector('.point');
-  const container = document.querySelector('#container');
+  const game = document.querySelector('#game');
 
-  const containerWidth = parseInt(getStyle(container).width);
-  const containerHeight = parseInt(getStyle(container).height);
+  const gameWidth = parseInt(getStyle(game).width);
+  const gameHeight = parseInt(getStyle(game).height);
 
   let direction = '';
 
   document.addEventListener('keyup', setDirection);
 
   function setDirection(e) {
+    
     let now = new Date().getTime();
     if (now - lastClick <= (SPEED * 0.8)) {
       return;
@@ -108,9 +110,9 @@ window.onload = () => {
     if (
       willCollide(x, y)
         || x < 0
-        || x >= containerWidth
+        || x >= gameWidth
         || y < 0
-        || y >= containerHeight
+        || y >= gameHeight
       ) {
       gameOver();
       return;
@@ -149,8 +151,10 @@ window.onload = () => {
     const pointY = getStyle(point).top;
 
     if (
-      x <= pointX && x + size >= pointX
-      && y <= pointY && y + size >= pointY
+      x <= pointX 
+      && x + size >= pointX
+      && y <= pointY 
+      && y + size >= pointY
     ) {
       score();
       growUp();
@@ -173,12 +177,12 @@ window.onload = () => {
     div.classList.add('snake-part');
     div.style.left = '-200px';
     div.style.top = '-200px';
-    container.appendChild(div);
+    game.appendChild(div);
   }
 
   function spawnPoint() {
-    const x = Math.floor(Math.random() * (containerWidth / SIZE)) * SIZE;
-    const y = Math.floor(Math.random() * (containerHeight / SIZE)) * SIZE;
+    const x = Math.floor(Math.random() * (gameWidth / SIZE)) * SIZE;
+    const y = Math.floor(Math.random() * (gameHeight / SIZE)) * SIZE;
 
     point.style.left = `${x}px`;
     point.style.top = `${y}px`;
@@ -210,9 +214,9 @@ window.onload = () => {
     const pause = document.querySelector('#pause');
     
     if (isPaused) {
-      pause.style.display = 'block';
+      pause.classList.remove('hidden');
     } else {
-      pause.style.display = 'none';
+      pause.classList.add('hidden');
     }
   }
 

@@ -27,35 +27,6 @@ window.onload = () => {
 
   document.addEventListener('keyup', setDirection);
 
-  document.addEventListener('click', function (e) {
-    const offsetY = e.offsetY
-    const offsetX = e.offsetX
-    const snakeHead = document.querySelector('.snake-part');
-    const x = parseInt(snakeHead.style.left);
-    const y = parseInt(snakeHead.style.top);
-
-    if (direction == 'left' || direction == 'right') {
-      if (offsetY > y) {
-        direction = 'down'
-      } else {
-        direction = 'up';
-      }
-
-      return;
-    }
-
-    if (direction == 'up' || direction == 'down') {
-      if (offsetX > x) {
-        direction = 'right'
-      } else {
-        direction = 'left';
-      }
-      return;
-    }
-
-    direction = 'right'
-  });
-
   function setDirection(e) {
     
     let now = new Date().getTime();
@@ -85,7 +56,7 @@ window.onload = () => {
         }
         break;
       case KEY_DOWN:
-        if (direction != 'up') {
+        if (direction != 'top') {
           direction = 'down'
         }
         break;

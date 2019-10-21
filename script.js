@@ -59,7 +59,7 @@ window.onload = () => {
   function setDirection(e) {
     
     let now = new Date().getTime();
-    if (now - lastClick <= (SPEED * 0.8)) {
+    if (now - lastClick <= (SPEED * checkout)) {
       return;
     }
 
@@ -223,7 +223,7 @@ window.onload = () => {
   }
 
   function speedUp() {
-    SPEED -= 1;
+    SPEED -= 2;
   }
 
   function hidePoint() {

@@ -4,7 +4,7 @@ window.onload = () => {
   const KEY_UP = 87;
   const KEY_DOWN = 83;
   const KEY_PAUSE = 32;
-  const SPEEDUP = 0.8
+  const CLICK_LIMIT = 2;
   
   const SIZE = parseInt(getStyle(document.querySelector('.snake-part')).width);
   
@@ -60,7 +60,7 @@ window.onload = () => {
   function setDirection(e) {
     
     let now = new Date().getTime();
-    if (now - lastClick <= (SPEED * SPEEDUP)) {
+    if (now - lastClick <= (SPEED * CLICK_LIMIT)) {
       return;
     }
 

@@ -28,7 +28,7 @@ window.onload = () => {
 
   document.addEventListener('keyup', setDirection);
 
-  document.addEventListener('click', function (e) {
+  game.addEventListener('click', function (e) {
     const offsetY = e.offsetY
     const offsetX = e.offsetX
     const snakeHead = document.querySelector('.snake-part');

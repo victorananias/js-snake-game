@@ -1,20 +1,19 @@
 window.onload = () => {
-  const KEY_LEFT = 65;
-  const KEY_RIGHT = 68;
-  const KEY_UP = 87;
-  const KEY_DOWN = 83;
-  const KEY_PAUSE = 32;
-  const CLICK_LIMIT = 2;
-  
+  const KEY_LEFT = 65,
+    KEY_RIGHT = 68,
+    KEY_UP = 87,
+    KEY_DOWN = 83,
+    KEY_PAUSE = 32;
+
   const SIZE = parseInt(getStyle(document.querySelector('.snake-part')).width);
-  
+
   let SPEED = 200;
-  
+
   let scorePoints = 0;
-  
+
   let lastTime = new Date().getTime();
   let lastClick = new Date().getTime();
-  
+
   let isGameOver = false
   let isPaused = false;
 
@@ -27,6 +26,26 @@ window.onload = () => {
   let direction = '';
 
   document.addEventListener('keyup', setDirection);
+
+  const btns = document.querySelectorAll('.btn');
+
+  [...btns].forEach(element => {
+    element.addEventListener('click', e => {
+      const btn = e.target.dataset.direction;
+
+      if (btn == 'pause') {
+        togglePause()
+      } else if (direction != 'right' && btn == 'left') {
+        direction = 'left'
+      } else if (direction != 'left' && btn == 'right') {
+        direction = 'right'
+      } else if (direction != 'down' && btn == 'up') {
+        direction = 'up'
+      } else if (direction != 'up' && btn == 'down') {
+        direction = 'down'
+      }
+    })
+  });
 
   game.addEventListener('click', function (e) {
     const offsetY = e.offsetY
@@ -58,9 +77,9 @@ window.onload = () => {
   });
 
   function setDirection(e) {
-    
+
     let now = new Date().getTime();
-    if (now - lastClick <= (SPEED * CLICK_LIMIT)) {
+    if (now - lastClick <= (SPEED * 0.8)) {
       return;
     }
 
@@ -139,11 +158,11 @@ window.onload = () => {
 
     if (
       willCollide(x, y)
-        || x < 0
-        || x >= gameWidth
-        || y < 0
-        || y >= gameHeight
-      ) {
+      || x < 0
+      || x >= gameWidth
+      || y < 0
+      || y >= gameHeight
+    ) {
       gameOver();
       return;
     }
@@ -168,12 +187,12 @@ window.onload = () => {
       const part = parts[i];
       const partX = parseInt(part.style.left);
       const partY = parseInt(part.style.top);
-      
+
       if (x == partX && y == partY) {
         return true;
       }
     }
-    
+
   }
 
   function pointCheck(x, y, size) {
@@ -181,9 +200,9 @@ window.onload = () => {
     const pointY = getStyle(point).top;
 
     if (
-      x <= pointX 
+      x <= pointX
       && x + size >= pointX
-      && y <= pointY 
+      && y <= pointY
       && y + size >= pointY
     ) {
       score();
@@ -239,10 +258,10 @@ window.onload = () => {
 
   function togglePause() {
     if (isGameOver) return;
-    
+
     isPaused = !isPaused;
     const pause = document.querySelector('#pause');
-    
+
     if (isPaused) {
       pause.classList.remove('hidden');
     } else {
@@ -253,7 +272,7 @@ window.onload = () => {
   function gameOver() {
     isGameOver = true;
     const gameOver = document.querySelector('#game-over');
-    gameOver.style.webkitAnimationPlayState  = 'running'
+    gameOver.style.webkitAnimationPlayState = 'running'
   }
 
   spawnPoint();

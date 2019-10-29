@@ -16,17 +16,18 @@ body,
 }
 
 :root {
-  --main-size: 15px;
-  --game-size: 460px;
+  --game-size: 400px;
+  --main-size: calc(var(--game-size) / 25);
   --snake-color: #c54c4c;
   --point-color: #4bb84b;
+  --btn-color: rgb(77, 76, 76);
+  --btn-size: 30px;
 }
 
-@media (min-width: 600px) 
-{
+@media (min-width: 600px) {
   :root {
-    --main-size: 20px;
     --game-size: 500px;
+    --main-size: calc(var(--game-size) / 25);
     --snake-color: #c54c4c;
     --point-color: #4bb84b;
   }
@@ -53,7 +54,8 @@ body {
   position: relative;
 }
 
-#score, #instructions {
+#score,
+#instructions {
   width: var(--game-size);
 }
 
@@ -118,6 +120,7 @@ body {
 }
 
 .point {
+  border-radius: 0.2rem;
   width: var(--main-size);
   height: var(--main-size);
   position: absolute;
@@ -129,4 +132,74 @@ body {
   position: absolute;
   width: 50%;
   height: 50%;
+}
+
+#controllers {
+  margin-top: 1rem;
+  width: calc(var(--btn-size) * 4);
+  height: calc(var(--btn-size) * 4);
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.flex-spaced {
+  justify-content: space-between;
+}
+
+.btn {
+  width: 0;
+  height: 0;
+  background: none;
+}
+
+.btn-left {
+  border-right: var(--btn-size) solid var(--btn-color);
+  border-top: var(--btn-size) solid transparent;
+  border-bottom: var(--btn-size) solid transparent;
+  border-left: none;
+}
+
+.btn-right {
+  border-left: var(--btn-size) solid var(--btn-color);
+  border-top: var(--btn-size) solid transparent;
+  border-bottom: var(--btn-size) solid transparent;
+  border-right: none;
+}
+
+.btn-up {
+  border-bottom: var(--btn-size) solid var(--btn-color);
+  border-right: var(--btn-size) solid transparent;
+  border-left: var(--btn-size) solid transparent;
+  border-top: none;
+}
+
+.btn-down {
+  border-top: var(--btn-size) solid var(--btn-color);
+  border-right: var(--btn-size) solid transparent;
+  border-left: var(--btn-size) solid transparent;
+  border-bottom: none;
+}
+
+.pause-container {
+  width: 100%; 
+  height: auto; 
+  margin-top: 10%;
+  padding: 0 3%;
+}
+
+.btn-pause {
+  float: right;
+  width: auto;
+  height: auto;
+  background-color: var(--btn-color);
+  color: white;
+  border: 0;
+  border-radius: .2rem;
+  padding: 5px 10px;
 }

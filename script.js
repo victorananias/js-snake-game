@@ -1,10 +1,10 @@
 const $ = document.querySelector.bind(document);
 
-const KEY_LEFT = 65;
-KEY_RIGHT = 68,
-  KEY_UP = 87,
-  KEY_DOWN = 83,
-  KEY_PAUSE = 32;
+const ARROW_LEFT = 65;
+  ARROW_RIGHT = 68,
+  ARROW_UP = 87,
+  ARROW_DOWN = 83,
+  SPACE = 32;
 
 const SIZE = parseInt(getStyle($('.snake-part')).width);
 
@@ -67,25 +67,25 @@ function setDirection(e) {
   lastClick = now;
 
   switch (e.keyCode) {
-    case KEY_PAUSE:
+    case SPACE:
       togglePause();
       break;
-    case KEY_LEFT:
+    case ARROW_LEFT:
       if (direction != 'right') {
         direction = 'left'
       }
       break;
-    case KEY_RIGHT:
+    case ARROW_RIGHT:
       if (direction != 'left') {
         direction = 'right'
       }
       break;
-    case KEY_UP:
+    case ARROW_UP:
       if (direction != 'down') {
         direction = 'up'
       }
       break;
-    case KEY_DOWN:
+    case ARROW_DOWN:
       if (direction != 'up') {
         direction = 'down'
       }

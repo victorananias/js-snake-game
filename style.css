@@ -107,7 +107,7 @@ body {
   }
 }
 
-.snake-part {
+.snake-piece {
   background-color: var(--snake-color);
   width: var(--main-size);
   height: var(--main-size);

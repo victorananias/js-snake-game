@@ -6,7 +6,7 @@ const ARROW_LEFT = 65;
   ARROW_DOWN = 83,
   SPACE = 32;
 
-const SIZE = parseInt(getStyle($('.snake-part')).width);
+const SIZE = parseInt(getStyle($('.snake-piece')).width);
 
 let SPEED = 180;
 
@@ -24,74 +24,73 @@ const game = $('#game');
 const gameWidth = parseInt(getStyle(game).width);
 const gameHeight = parseInt(getStyle(game).height);
 
-let direction = '';
+const snakeStyle = getStyle($('.snake-piece'))
 
-document.addEventListener('keyup', setDirection);
+const snake = new Snake(
+  parseInt(snakeStyle.left),
+  parseInt(snakeStyle.top),
+  parseInt(snakeStyle.width)
+)
 
-game.addEventListener('click', function (e) {
-  const offsetY = e.offsetY
-  const offsetX = e.offsetX
-  const snakeHead = $('.snake-part');
-  const x = parseInt(snakeHead.style.left);
-  const y = parseInt(snakeHead.style.top);
+const keyboard = new Keyboard()
 
-  if (direction == 'left' || direction == 'right') {
-    if (offsetY > y) {
-      direction = 'down'
-    } else {
-      direction = 'up';
-    }
 
-    return;
+// game.addEventListener('click', function (e) {
+//   const offsetY = e.offsetY
+//   const offsetX = e.offsetX
+//   const snakeHead = $('.snake-piece');
+//   const x = parseInt(snakeHead.style.left);
+//   const y = parseInt(snakeHead.style.top);
+
+//   if (direction == 'left' || direction == 'right') {
+//     if (offsetY > y) {
+//       direction = 'down'
+//     } else {
+//       direction = 'up';
+//     }
+
+//     return;
+//   }
+
+//   if (direction == 'up' || direction == 'down') {
+//     if (offsetX > x) {
+//       direction = 'right'
+//     } else {
+//       direction = 'left';
+//     }
+//     return;
+//   }
+
+//   direction = 'right'
+// });
+
+keyboard.onPress(ARROW_LEFT, () => {
+  if (snake.direction != 'right') {
+    snake.direction = 'left'
   }
+})
 
-  if (direction == 'up' || direction == 'down') {
-    if (offsetX > x) {
-      direction = 'right'
-    } else {
-      direction = 'left';
-    }
-    return;
+keyboard.onPress(ARROW_RIGHT, () => {
+  if (snake.direction != 'left') {
+    snake.direction = 'right'
   }
+})
 
-  direction = 'right'
-});
-
-function setDirection(e) {
-
-  let now = new Date().getTime();
-  if (now - lastClick <= (SPEED * 0.8)) {
-    return;
+keyboard.onPress(ARROW_UP, () => {
+  if (snake.direction != 'down') {
+    snake.direction = 'up'
   }
+})
 
-  lastClick = now;
-
-  switch (e.keyCode) {
-    case SPACE:
-      togglePause();
-      break;
-    case ARROW_LEFT:
-      if (direction != 'right') {
-        direction = 'left'
-      }
-      break;
-    case ARROW_RIGHT:
-      if (direction != 'left') {
-        direction = 'right'
-      }
-      break;
-    case ARROW_UP:
-      if (direction != 'down') {
-        direction = 'up'
-      }
-      break;
-    case ARROW_DOWN:
-      if (direction != 'up') {
-        direction = 'down'
-      }
-      break;
+keyboard.onPress(ARROW_DOWN, () => {
+  if (snake.direction != 'up') {
+    snake.direction = 'down'
   }
-}
+})
+
+keyboard.onPress(SPACE, () => {
+  togglePause()
+})
 
 function animate() {
   if (isPaused || isGameOver) {
@@ -102,63 +101,31 @@ function animate() {
   let now = new Date().getTime();
 
   if (now - lastTime > SPEED) {
-    move();
-    lastTime = now;
+    snake.update()
+    lastTime = now
   }
+
+  snake.draw()
 
   requestAnimationFrame(animate);
 }
 
 function move() {
-  const parts = snakeBody();
+  
 
-  let x = parseInt(getStyle(parts[0]).left);
-  let y = parseInt(getStyle(parts[0]).top);
+  // if (
+  //   willCollide(x, y)
+  //   || x < 0
+  //   || x >= gameWidth
+  //   || y < 0
+  //   || y >= gameHeight
+  // ) {
+  //   gameOver();
+  //   return;
+  // }
 
-  if (!direction) return;
 
-  if (direction == 'left') {
-    shouldReposition = true;
-    x -= SIZE;
-  }
-
-  if (direction == 'right') {
-    shouldReposition = true;
-    x += SIZE;
-  }
-
-  if (direction == 'up') {
-    shouldReposition = true;
-    y -= SIZE;
-  }
-
-  if (direction == 'down') {
-    shouldReposition = true;
-    y += SIZE;
-  }
-
-  if (
-    willCollide(x, y)
-    || x < 0
-    || x >= gameWidth
-    || y < 0
-    || y >= gameHeight
-  ) {
-    gameOver();
-    return;
-  }
-
-  for (let i = 0; i < parts.length; i++) {
-    let oldX = parseInt(parts[i].style.left);
-    let oldY = parseInt(parts[i].style.top);
-
-    reposition(parts[i], x, y);
-
-    x = oldX;
-    y = oldY;
-  }
-
-  pointCheck(parts[0].style.left, parts[0].style.top, SIZE)
+  // pointCheck(parts[0].style.left, parts[0].style.top, SIZE)
 }
 
 function willCollide(x, y) {
@@ -195,7 +162,7 @@ function pointCheck(x, y, size) {
 }
 
 function snakeBody() {
-  return document.querySelectorAll('.snake-part');
+  return document.querySelectorAll('.snake-piece');
 }
 
 function getStyle(element) {
@@ -204,7 +171,7 @@ function getStyle(element) {
 
 function growUp() {
   const div = document.createElement('div')
-  div.classList.add('snake-part');
+  div.classList.add('snake-piece');
   div.style.left = '-200px';
   div.style.top = '-200px';
   game.appendChild(div);
@@ -230,11 +197,6 @@ function speedUp() {
 function hidePoint() {
   point.style.left = '-200px';
   point.style.top = '-200px';
-}
-
-function reposition(el, x, y) {
-  el.style.left = `${x}px`;
-  el.style.top = `${y}px`;
 }
 
 function togglePause() {

@@ -19,16 +19,13 @@ body,
   --main-size: 15px;
   --game-size: 460px;
   --snake-color: #c54c4c;
-  --point-color: #4bb84b;
+  --fruit-color: #4bb84b;
 }
 
-@media (min-width: 600px) 
-{
+@media (min-width: 600px) {
   :root {
     --main-size: 20px;
     --game-size: 500px;
-    --snake-color: #c54c4c;
-    --point-color: #4bb84b;
   }
 }
 
@@ -53,7 +50,8 @@ body {
   position: relative;
 }
 
-#score, #instructions {
+#score,
+#instructions {
   width: var(--game-size);
 }
 
@@ -117,15 +115,15 @@ body {
   top: calc(var(--main-size) * 4);
 }
 
-.point {
+.fruit {
   width: var(--main-size);
   height: var(--main-size);
   position: absolute;
 }
 
-.point .point-content {
+.fruit .fruit-content {
   border-radius: 20%;
-  background-color: var(--point-color);
+  background-color: var(--fruit-color);
   position: absolute;
   width: 50%;
   height: 50%;

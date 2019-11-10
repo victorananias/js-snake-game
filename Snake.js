@@ -1,18 +1,16 @@
 class Snake {
-  size
-  x
-  y
-  pieces = []
-  direction = ''
-  speed = 180
 
   constructor(x, y, size) {
     const head = $('.snake-piece')
 
+    this.direction = ''
+    this.speed = 180
+    
     this.x = x
     this.y = y
     this.size = size
-
+    
+    this.pieces = []
     this.pieces.push(head)
   }
 

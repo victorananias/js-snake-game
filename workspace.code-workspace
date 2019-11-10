@@ -8,6 +8,6 @@
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "snake-game"
+		"liveServer.settings.multiRootWorkspaceName": "js-snake-game"
 	}
 }

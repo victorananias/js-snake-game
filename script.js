@@ -18,7 +18,6 @@ let lastClick = new Date().getTime();
 let isGameOver = false
 let isPaused = false;
 
-const point = $('.point');
 const game = $('#game');
 
 const gameWidth = parseInt(getStyle(game).width);
@@ -32,7 +31,10 @@ const snake = new Snake(
   parseInt(snakeStyle.width)
 )
 
+const fruit = new Fruit()
 const keyboard = new Keyboard()
+
+fruit.update()
 
 
 // game.addEventListener('click', function (e) {
@@ -106,6 +108,7 @@ function animate() {
   }
 
   snake.draw()
+  fruit.draw()
 
   requestAnimationFrame(animate);
 }
@@ -178,11 +181,11 @@ function growUp() {
 }
 
 function spawnPoint() {
-  const x = Math.floor(Math.random() * (gameWidth / SIZE)) * SIZE;
-  const y = Math.floor(Math.random() * (gameHeight / SIZE)) * SIZE;
+  // const x = Math.floor(Math.random() * (gameWidth / SIZE)) * SIZE;
+  // const y = Math.floor(Math.random() * (gameHeight / SIZE)) * SIZE;
 
-  point.style.left = `${x}px`;
-  point.style.top = `${y}px`;
+  // point.style.left = `${x}px`;
+  // point.style.top = `${y}px`;
 }
 
 function score() {
@@ -195,8 +198,8 @@ function speedUp() {
 }
 
 function hidePoint() {
-  point.style.left = '-200px';
-  point.style.top = '-200px';
+  // point.style.left = '-200px';
+  // point.style.top = '-200px';
 }
 
 function togglePause() {

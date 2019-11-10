@@ -111,8 +111,8 @@ body {
   height: var(--main-size);
   border-radius: 0.2rem;
   position: absolute;
-  left: calc(var(--main-size) * 4);
-  top: calc(var(--main-size) * 4);
+  left: -200px;
+  top: -200px;
 }
 
 .fruit {

@@ -1,29 +1,21 @@
 class Snake {
 
   constructor(x, y, size) {
-    const head = $('.snake-piece')
-
-    this.direction = ''
-    this.speed = 180
-    
     this.x = x
     this.y = y
+    this.direction = ''
+    this.speed = 180
     this.size = size
-    
+
     this.pieces = []
-    this.pieces.push(head)
+
+    this.pieces.push(new SnakePiece(x, y))
+    this.pieces.push(new SnakePiece(-200, -200))
+    this.pieces.push(new SnakePiece(-200, -200))
   }
 
-  grow() {
-    const div = document.createElement('div')
-    div.classList.add('snake-piece')
-
-    div.style.left = '-200px'
-    div.style.top = '-200px'
-
-    this.pieces.push(part)
-
-    $('#game').appendChild(div)
+  grow(x = -200, y = -200) {
+    this.pieces.push(new SnakePiece(x, y))
   }
 
   update() {
@@ -53,14 +45,15 @@ class Snake {
     let x = this.x
     let y = this.y
 
+    if (this.x == this.pieces[0].x && this.y == this.pieces[0].y) {
+      return
+    }
+
     for (let i = 0; i < this.pieces.length; i++) {
-      let oldX = parseInt(this.pieces[i].style.left)
-      let oldY = parseInt(this.pieces[i].style.top)
+      let oldX = this.pieces[i].x
+      let oldY = this.pieces[i].y
 
-      const el = this.pieces[i]
-
-      el.style.left = `${x}px`
-      el.style.top = `${y}px`
+      this.pieces[i].move(x, y)
 
       x = oldX
       y = oldY

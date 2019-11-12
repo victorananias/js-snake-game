@@ -21,4 +21,18 @@ class SnakePiece {
   get y() {
     return parseInt(this.element.style.top)
   }
+
+  get width() {
+    return (this.element.offsetWidth)
+  }
+
+  get height() {
+    return (this.element.offsetHeight)
+  }
+
+  get hitbox() {
+    return {
+      x: this.x, y: this.y, width: this.width, height: this.height
+    }
+  }
 }

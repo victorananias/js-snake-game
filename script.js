@@ -1,7 +1,7 @@
 const $ = document.querySelector.bind(document);
 
 const ARROW_LEFT = 65;
-  ARROW_RIGHT = 68,
+ARROW_RIGHT = 68,
   ARROW_UP = 87,
   ARROW_DOWN = 83,
   SPACE = 32;
@@ -31,8 +31,9 @@ const snake = new Snake(
   SIZE
 )
 
-const fruit = new Fruit()
+const fruit = new Fruit(SIZE)
 const keyboard = new Keyboard()
+const colisor = new Colisor()
 
 fruit.update()
 fruit.draw()
@@ -66,6 +67,9 @@ fruit.draw()
 
 //   direction = 'right'
 // })
+
+colisor.addObject(snake)
+colisor.addObject(fruit)
 
 keyboard.onPress(ARROW_LEFT, () => {
   if (snake.direction != 'right') {
@@ -106,6 +110,7 @@ function animate() {
   if (now - lastTime > SPEED) {
     snake.update()
     lastTime = now
+    colisor.check()
   }
 
   snake.draw()
@@ -165,7 +170,7 @@ function pointCheck(x, y, size) {
 }
 
 function snakeBody() {
-//   return document.querySelectorAll('.snake-piece')
+  //   return document.querySelectorAll('.snake-piece')
 }
 
 function getStyle(element) {
@@ -173,11 +178,11 @@ function getStyle(element) {
 }
 
 function growUp() {
-//   const div = document.createElement('div')
-//   div.classList.add('snake-piece')
-//   div.style.left = '-200px'
-//   div.style.top = '-200px'
-//   game.appendChild(div)
+  //   const div = document.createElement('div')
+  //   div.classList.add('snake-piece')
+  //   div.style.left = '-200px'
+  //   div.style.top = '-200px'
+  //   game.appendChild(div)
 }
 
 function spawnPoint() {

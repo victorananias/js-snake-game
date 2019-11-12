@@ -59,4 +59,12 @@ class Snake {
       y = oldY
     }
   }
+
+  colidedTo(obj) {
+    console.log('colided')
+  }
+
+  hitboxes() {
+    return [this.pieces[0].hitbox]
+  }
 }

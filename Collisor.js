@@ -1,4 +1,4 @@
-class Colisor {
+class Collisor {
   constructor() {
     this.objects = []
     this.checked = {}
@@ -35,7 +35,7 @@ class Colisor {
           continue
         }
 
-        this.checkColison(this.objects[i], this.objects[j])
+        this.checkCollision(this.objects[i], this.objects[j])
 
         this.checked[objI].push(objJ)
         this.checked[objJ].push(objI)
@@ -43,25 +43,25 @@ class Colisor {
     }
   }
 
-  checkColison(obj1, obj2) {
+  checkCollision(obj1, obj2) {
     const hitboxes1 = obj1.hitboxes()
     const hitboxes2 = obj2.hitboxes()
 
     for (const i in hitboxes1) {
       for (const j in hitboxes2) {
-        if (!this.colided(hitboxes1[i], hitboxes2[j])) {
+        if (!this.collided(hitboxes1[i], hitboxes2[j])) {
           continue
         }
 
-        obj1.colidedTo(obj2)
-        obj2.colidedTo(obj1)
+        obj1.collidedTo(obj2)
+        obj2.collidedTo(obj1)
 
         return
       }
     }
   }
 
-  colided(hitbox1, hitbox2) {
+  collided(hitbox1, hitbox2) {
     return (hitbox1.x + hitbox1.largura) > hitbox2.x &&
       hitbox1.x < (hitbox2.x + hitbox2.largura) &&
       (hitbox1.y + hitbox1.altura) > hitbox2.y &&

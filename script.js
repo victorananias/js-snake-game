@@ -110,8 +110,9 @@ function animate() {
   if (now - lastTime > SPEED) {
     snake.update()
     lastTime = now
-    collisor.check()
   }
+  
+  collisor.check()
 
   snake.draw()
 

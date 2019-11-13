@@ -17,16 +17,9 @@ class Fruit {
     fruit.style.top = `${this.y}px`
   }
 
-  get width() {
-    return parseInt(this.element.style.width)
-  }
-
-  get height() {
-    return parseInt(this.element.style.height)
-  }
-
-  colidedTo(obj) {
-    console.log('colided')
+  collidedTo(obj) {
+    this.update()
+    this.draw()
   }
 
   hitboxes() {

@@ -1,7 +1,6 @@
 class Collisor {
   constructor() {
     this.objects = []
-    this.checked = {}
   }
 
   addObject(object) {
@@ -9,7 +8,7 @@ class Collisor {
   }
 
   check() {
-    this.checked = {}
+    const checked = {}
 
     for (const i in this.objects) {
       for (const j in this.objects) {
@@ -20,25 +19,24 @@ class Collisor {
         const objI = JSON.stringify(this.objects[i])
         const objJ = JSON.stringify(this.objects[j])
 
-        if (!this.checked[objI]) {
-          this.checked[objI] = []
+        if (!checked[objI]) {
+          checked[objI] = []
         }
 
-        if (!this.checked[objJ]) {
-          this.checked[objJ] = []
+        if (!checked[objJ]) {
+          checked[objJ] = []
         }
 
         if (
-          this.checked[objI].indexOf(objJ) > -1
-          || this.checked[objJ].indexOf(objI) > -1
+          checked[objI].indexOf(objJ) > -1 || checked[objJ].indexOf(objI) > -1
         ) {
           continue
         }
 
         this.checkCollision(this.objects[i], this.objects[j])
 
-        this.checked[objI].push(objJ)
-        this.checked[objJ].push(objI)
+        checked[objI].push(objJ)
+        checked[objJ].push(objI)
       }
     }
   }
@@ -62,9 +60,9 @@ class Collisor {
   }
 
   collided(hitbox1, hitbox2) {
-    return (hitbox1.x + hitbox1.largura) > hitbox2.x &&
-      hitbox1.x < (hitbox2.x + hitbox2.largura) &&
-      (hitbox1.y + hitbox1.altura) > hitbox2.y &&
-      hitbox1.y < (hitbox2.y + hitbox2.altura)
+    return (hitbox1.x + hitbox1.width) > hitbox2.x &&
+      hitbox1.x < (hitbox2.x + hitbox2.width) &&
+      (hitbox1.y + hitbox1.height) > hitbox2.y &&
+      hitbox1.y < (hitbox2.y + hitbox2.height)
   }
 }

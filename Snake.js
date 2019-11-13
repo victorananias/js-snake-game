@@ -10,8 +10,6 @@ class Snake {
     this.pieces = []
 
     this.pieces.push(new SnakePiece(x, y))
-    this.pieces.push(new SnakePiece(-200, -200))
-    this.pieces.push(new SnakePiece(-200, -200))
   }
 
   grow(x = -200, y = -200) {
@@ -60,8 +58,8 @@ class Snake {
     }
   }
 
-  colidedTo(obj) {
-    console.log('colided')
+  collidedTo(obj) {
+    this.grow()
   }
 
   hitboxes() {

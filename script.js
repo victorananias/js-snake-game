@@ -33,7 +33,7 @@ const snake = new Snake(
 
 const fruit = new Fruit(SIZE)
 const keyboard = new Keyboard()
-const colisor = new Colisor()
+const collisor = new Collisor()
 
 fruit.update()
 fruit.draw()
@@ -68,8 +68,8 @@ fruit.draw()
 //   direction = 'right'
 // })
 
-colisor.addObject(snake)
-colisor.addObject(fruit)
+collisor.addObject(snake)
+collisor.addObject(fruit)
 
 keyboard.onPress(ARROW_LEFT, () => {
   if (snake.direction != 'right') {
@@ -110,7 +110,7 @@ function animate() {
   if (now - lastTime > SPEED) {
     snake.update()
     lastTime = now
-    colisor.check()
+    collisor.check()
   }
 
   snake.draw()

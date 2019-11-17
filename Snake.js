@@ -6,10 +6,9 @@ class Snake {
     this.size = size
     this.collisor = collisor
 
-    const head = new SnakePiece(x, y, this.size)
-    this.head = head
+    this.head = new SnakePiece(x, y, this.size)
     this.head.collidedTo = this.collidedTo.bind(this)
-    this.collisor.addObject(head)
+    this.collisor.addObject(this.head)
 
     this.pieces = []
     this.shouldGrow = false
@@ -80,7 +79,10 @@ class Snake {
   collidedTo(obj) {
     if (obj instanceof Fruit) {
       this.shouldGrow = true
+      //FIXME: nneed refactoring
+      score()
     } else if (obj instanceof SnakePiece) {
+      //FIXME: nneed refactoring
       gameOver()
     }
   }

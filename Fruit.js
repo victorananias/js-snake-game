@@ -12,7 +12,7 @@ class Fruit {
   }
 
   draw() {
-    //FIXME: refactor
+    //FIXME: nneed refactoring
     this.context.fillStyle = '#c54c4c'
     this.context.fillRect(this.x, this.y, this.size, this.size)
   }

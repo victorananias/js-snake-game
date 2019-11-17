@@ -14,6 +14,4 @@ class SnakePiece {
       x: this.x, y: this.y, width: this.size, height: this.size
     }]
   }
-
-  collidedTo(obj) { }
 }

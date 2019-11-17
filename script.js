@@ -1,7 +1,7 @@
 const $ = document.querySelector.bind(document);
 
 const ARROW_LEFT = 'a';
-ARROW_RIGHT = 'd',
+  ARROW_RIGHT = 'd',
   ARROW_UP = 'w',
   ARROW_DOWN = 's',
   SPACE = ' ';
@@ -18,21 +18,21 @@ let lastClick = new Date().getTime()
 let isGameOver = false
 let isPaused = false
 
-const game = $('#game')
-
-const gameWidth = parseInt(getStyle(game).width)
-const gameHeight = parseInt(getStyle(game).height)
+// const gameWidth = parseInt(getStyle(game).width)
+// const gameHeight = parseInt(getStyle(game).height)
 
 // const snakeStyle = getStyle($('.snake-piece'))
 
 
-const fruit = new Fruit(SIZE)
+const canvas = $('#game')
+const context = canvas.getContext('2d')
+
+const fruit = new Fruit(SIZE, context)
 const keyboard = new Keyboard()
 const collisor = new Collisor()
 const snake = new Snake(200, 200, SIZE, collisor)
 
 fruit.update()
-fruit.draw()
 
 
 // game.addEventListener('click', function (e) {
@@ -95,21 +95,27 @@ keyboard.onPress(SPACE, () => {
 })
 
 function animate() {
+
   if (isPaused || isGameOver) {
     requestAnimationFrame(animate)
     return
   }
 
+  context.clearRect(0, 0, canvas.width, canvas.size)
+  context.fillStyle = '#3a3a3a'
+  context.fillRect(0, 0, canvas.width, canvas.height)
+
   let now = new Date().getTime()
 
-  if (now - lastTime > SPEED * 3) {
+  if (now - lastTime > SPEED ) {
     snake.update()
     lastTime = now
-    collisor.check()
   }
 
+  snake.draw(context)
+  fruit.draw(context)
 
-  snake.draw()
+  collisor.check()
 
   requestAnimationFrame(animate)
 }

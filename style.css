@@ -15,20 +15,6 @@ body,
   width: 100%;
 }
 
-:root {
-  --main-size: 15px;
-  --game-size: 460px;
-  --snake-color: #c54c4c;
-  --fruit-color: #4bb84b;
-}
-
-@media (min-width: 600px) {
-  :root {
-    --main-size: 20px;
-    --game-size: 500px;
-  }
-}
-
 body {
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   -webkit-font-smothing: antialised !important;
@@ -58,7 +44,7 @@ body {
 #game {
   width: 100%;
   height: 100%;
-  background-color: #3a3a3a;
+  border: 1px solid #3a3a3a;
   position: relative;
   overflow: hidden;
 }
@@ -103,28 +89,4 @@ body {
   to {
     top: 50%;
   }
-}
-
-.snake-piece {
-  background-color: var(--snake-color);
-  width: var(--main-size);
-  height: var(--main-size);
-  border-radius: 0.2rem;
-  position: absolute;
-  left: -200px;
-  top: -200px;
-}
-
-.fruit {
-  width: var(--main-size);
-  height: var(--main-size);
-  position: absolute;
-}
-
-.fruit .fruit-content {
-  border-radius: 20%;
-  background-color: var(--fruit-color);
-  position: absolute;
-  width: 50%;
-  height: 50%;
 }

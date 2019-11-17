@@ -1,80 +1,87 @@
 class Snake {
 
   constructor(x, y, size, collisor) {
-    this.x = x
-    this.y = y
     this.direction = ''
     this.speed = 180
     this.size = size
     this.collisor = collisor
 
-    const head = new SnakeHead(x, y, this.collidedTo.bind(this))
+    const head = new SnakePiece(x, y, this.size)
     this.head = head
+    this.head.collidedTo = this.collidedTo.bind(this)
     this.collisor.addObject(head)
 
     this.pieces = []
-    this.grow()
-    this.grow()
-    this.grow()
-    this.grow()
-    this.grow()
-    this.grow()
-    this.grow()
-
+    this.shouldGrow = false
   }
 
-  grow(x = -300, y = -300) {
-    const newPiece = new SnakePiece(x, y)
+  grow(x, y) {
+    const newPiece = new SnakePiece(x, y, this.size)
     this.pieces.push(newPiece)
     this.collisor.addObject(newPiece)
   }
 
   update() {
+    let x = this.head.x
+    let y = this.head.y
+
     switch (this.direction) {
       case '':
         break
 
       case 'left':
-        this.x -= this.size
+        x -= this.size
         break
 
       case 'right':
-        this.x += this.size
+        x += this.size
         break
 
       case 'up':
-        this.y -= this.size
+        y -= this.size
         break
 
       case 'down':
-        this.y += this.size
+        y += this.size
         break
-    }
-  }
-
-  draw() {
-    let x = this.x
-    let y = this.y
-
-    if (this.x == this.head.x && this.y == this.head.y) {
-      return
     }
 
     const body = [this.head, ...this.pieces]
 
     for (let i = 0; i < body.length; i++) {
-      let oldX = body[i].x
-      let oldY = body[i].y
+      const piece = body[i]
 
-      body[i].move(x, y)
+      let oldX = piece.x
+      let oldY = piece.y
+
+      piece.move(x, y)
 
       x = oldX
       y = oldY
     }
+
+    if (this.shouldGrow) {
+      this.grow(x, y)
+      this.shouldGrow = false
+    }
+
+  }
+
+  draw(context) {
+    const body = [this.head, ...this.pieces]
+
+    for (let i = 0; i < body.length; i++) {
+      const piece = body[i]
+      context.fillStyle = '#4bb84b'
+      context.fillRect(piece.x, piece.y, piece.size, piece.size)
+    }
   }
 
   collidedTo(obj) {
-    console.log(this.head)
-    this.grow()
+    if (obj instanceof Fruit) {
+      this.shouldGrow = true
+    } else if (obj instanceof SnakePiece) {
+      alert('deu ruim')
+    }
   }
 }

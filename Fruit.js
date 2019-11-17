@@ -1,20 +1,20 @@
 class Fruit {
-  constructor(size) {
-    this.size = size
-    this.element = $('.fruit')
+  constructor(size, context) {
     this.x = -200
     this.y = -200
+    this.size = size
+    this.context = context
   }
 
   update() {
-    this.x = Math.floor(Math.random() * (gameWidth / this.size)) * this.size;
-    this.y = Math.floor(Math.random() * (gameHeight / this.size)) * this.size;
+    this.x = Math.floor(Math.random() * (500 / this.size)) * this.size;
+    this.y = Math.floor(Math.random() * (500 / this.size)) * this.size;
   }
 
   draw() {
-    const fruit = $('.fruit')
-    fruit.style.left = `${this.x}px`
-    fruit.style.top = `${this.y}px`
+    //FIXME: refactor
+    this.context.fillStyle = '#c54c4c'
+    this.context.fillRect(this.x, this.y, this.size, this.size)
   }
 
   collidedTo(obj) {

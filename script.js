@@ -1,10 +1,10 @@
 const $ = document.querySelector.bind(document);
 
-const ARROW_LEFT = 65;
-ARROW_RIGHT = 68,
-  ARROW_UP = 87,
-  ARROW_DOWN = 83,
-  SPACE = 32;
+const ARROW_LEFT = 'a';
+ARROW_RIGHT = 'd',
+  ARROW_UP = 'w',
+  ARROW_DOWN = 's',
+  SPACE = ' ';
 
 const SIZE = 20
 
@@ -25,15 +25,11 @@ const gameHeight = parseInt(getStyle(game).height)
 
 // const snakeStyle = getStyle($('.snake-piece'))
 
-const snake = new Snake(
-  200,
-  200,
-  SIZE
-)
 
 const fruit = new Fruit(SIZE)
 const keyboard = new Keyboard()
 const collisor = new Collisor()
+const snake = new Snake(200, 200, SIZE, collisor)
 
 fruit.update()
 fruit.draw()
@@ -68,7 +64,6 @@ fruit.draw()
 //   direction = 'right'
 // })
 
-collisor.addObject(snake)
 collisor.addObject(fruit)
 
 keyboard.onPress(ARROW_LEFT, () => {
@@ -107,12 +102,12 @@ function animate() {
 
   let now = new Date().getTime()
 
-  if (now - lastTime > SPEED) {
+  if (now - lastTime > SPEED * 3) {
     snake.update()
     lastTime = now
+    collisor.check()
   }
-  
-  collisor.check()
+
 
   snake.draw()
 

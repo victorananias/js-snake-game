@@ -47,6 +47,10 @@ class Collisor {
 
     for (const i in hitboxes1) {
       for (const j in hitboxes2) {
+        if (hitboxes1[i] instanceof SnakeHead || hitboxes1[j] instanceof SnakeHead) {
+          console.log(hitboxes1[i], hitboxes2[j])
+        }
+
         if (!this.collided(hitboxes1[i], hitboxes2[j])) {
           continue
         }

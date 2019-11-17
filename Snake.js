@@ -1,19 +1,32 @@
 class Snake {
 
-  constructor(x, y, size) {
+  constructor(x, y, size, collisor) {
     this.x = x
     this.y = y
     this.direction = ''
     this.speed = 180
     this.size = size
+    this.collisor = collisor
+
+    const head = new SnakeHead(x, y, this.collidedTo.bind(this))
+    this.head = head
+    this.collisor.addObject(head)
 
     this.pieces = []
+    this.grow()
+    this.grow()
+    this.grow()
+    this.grow()
+    this.grow()
+    this.grow()
+    this.grow()
 
-    this.pieces.push(new SnakePiece(x, y))
   }
 
-  grow(x = -200, y = -200) {
-    this.pieces.push(new SnakePiece(x, y))
+  grow(x = -300, y = -300) {
+    const newPiece = new SnakePiece(x, y)
+    this.pieces.push(newPiece)
+    this.collisor.addObject(newPiece)
   }
 
   update() {
@@ -43,15 +56,17 @@ class Snake {
     let x = this.x
     let y = this.y
 
-    if (this.x == this.pieces[0].x && this.y == this.pieces[0].y) {
+    if (this.x == this.head.x && this.y == this.head.y) {
       return
     }
 
-    for (let i = 0; i < this.pieces.length; i++) {
-      let oldX = this.pieces[i].x
-      let oldY = this.pieces[i].y
+    const body = [this.head, ...this.pieces]
 
-      this.pieces[i].move(x, y)
+    for (let i = 0; i < body.length; i++) {
+      let oldX = body[i].x
+      let oldY = body[i].y
+
+      body[i].move(x, y)
 
       x = oldX
       y = oldY
@@ -59,10 +74,7 @@ class Snake {
   }
 
   collidedTo(obj) {
+    console.log(this.head)
     this.grow()
-  }
-
-  hitboxes() {
-    return [this.pieces[0].hitbox]
   }
 }

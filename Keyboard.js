@@ -8,21 +8,21 @@ class Keyboard {
     document.addEventListener('keyup', this._onkeyup.bind(this))
   }
 
-  onPress(keyCode, action) {
-    this.shotFunctions[keyCode] = action
+  onPress(key, action) {
+    this.shotFunctions[key] = action
   }
 
-  _onkeydown({ keyCode }) {
-    this.holdedKeys[keyCode] = true
+  _onkeydown({ key }) {
+    this.holdedKeys[key] = true
 
-    if (this.shotFunctions[keyCode] && !this.pressedKeys[keyCode]) {
-      this.pressedKeys[keyCode] = true
-      this.shotFunctions[keyCode]()
+    if (this.shotFunctions[key] && !this.pressedKeys[key]) {
+      this.pressedKeys[key] = true
+      this.shotFunctions[key]()
     }
   }
 
-  _onkeyup({ keyCode }) {
-    this.pressedKeys[keyCode] = false
-    this.holdedKeys[keyCode] = false
+  _onkeyup({ key }) {
+    this.pressedKeys[key] = false
+    this.holdedKeys[key] = false
   }
 }

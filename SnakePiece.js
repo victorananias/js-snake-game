@@ -30,9 +30,11 @@ class SnakePiece {
     return (this.element.offsetHeight)
   }
 
-  get hitbox() {
-    return {
+  hitboxes() {
+    return [{
       x: this.x, y: this.y, width: this.width, height: this.height
-    }
+    }]
   }
+
+  collidedTo(obj) { }
 }

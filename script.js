@@ -34,6 +34,8 @@ const snake = new Snake(200, 200, SIZE, collisor)
 
 fruit.update()
 
+animate()
+
 
 // game.addEventListener('click', function (e) {
 //   const offsetY = e.offsetY
@@ -227,9 +229,6 @@ function gameOver() {
   const gameOver = $('#game-over')
   gameOver.style.webkitAnimationPlayState = 'running'
 }
-
-// spawnPoint()
-animate()
 
 function reload() {
   location.reload()

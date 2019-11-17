@@ -81,7 +81,7 @@ class Snake {
     if (obj instanceof Fruit) {
       this.shouldGrow = true
     } else if (obj instanceof SnakePiece) {
-      alert('deu ruim')
+      gameOver()
     }
   }
 }

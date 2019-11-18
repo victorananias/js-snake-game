@@ -13,7 +13,6 @@ let SPEED = 180
 let scorePoints = 0
 
 let lastTime = new Date().getTime()
-let lastClick = new Date().getTime()
 
 let isGameOver = false
 let isPaused = false
@@ -31,36 +30,18 @@ fruit.update()
 
 animate()
 
+collisor.addObject(new ScreenLimit(-20, 0, 20, 500))
+collisor.addObject(new ScreenLimit(501, 0, 20, 500))
+collisor.addObject(new ScreenLimit(0, -20, 500, 20))
+collisor.addObject(new ScreenLimit(0, 0, 500, 20))
 
 collisor.addObject(fruit)
 
-keyboard.onPress(MOVE_LEFT, () => {
-  if (snake.direction != 'right') {
-    snake.direction = 'left'
-  }
-})
-
-keyboard.onPress(MOVE_RIGHT, () => {
-  if (snake.direction != 'left') {
-    snake.direction = 'right'
-  }
-})
-
-keyboard.onPress(MOVE_UP, () => {
-  if (snake.direction != 'down') {
-    snake.direction = 'up'
-  }
-})
-
-keyboard.onPress(MOVE_DOWN, () => {
-  if (snake.direction != 'up') {
-    snake.direction = 'down'
-  }
-})
-
-keyboard.onPress(PAUSE, () => {
-  togglePause()
-})
+keyboard.onPress(MOVE_LEFT, () => snake.moveLeft())
+keyboard.onPress(MOVE_RIGHT, () => snake.moveRight())
+keyboard.onPress(MOVE_UP, () => snake.moveUp())
+keyboard.onPress(MOVE_DOWN, () => snake.moveDown())
+keyboard.onPress(PAUSE, () => togglePause())
 
 
 function animate() {
@@ -83,8 +64,9 @@ function animate() {
 
   snake.draw(context)
   fruit.draw(context)
-
+  
   collisor.check()
+
 
   requestAnimationFrame(animate)
 }

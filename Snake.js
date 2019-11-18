@@ -12,6 +12,7 @@ class Snake {
 
     this.pieces = []
     this.shouldGrow = false
+    this.continue = true
   }
 
   grow(x, y) {
@@ -67,6 +68,7 @@ class Snake {
   }
 
   draw(context) {
+    if (!this.continue) return;
     const body = [this.head, ...this.pieces]
 
     for (let i = 0; i < body.length; i++) {
@@ -83,7 +85,35 @@ class Snake {
       score()
     } else if (obj instanceof SnakePiece) {
       //FIXME: nneed refactoring
+      this.continue = false
       gameOver()
+    } else if (obj instanceof ScreenLimit) {
+      this.continue = false
+      gameOver()
+    }
+  }
+
+  moveDown() {
+    if (this.direction != 'up') {
+      this.direction = 'down'
+    }
+  }
+
+  moveUp() {
+    if (snake.direction != 'down') {
+      snake.direction = 'up'
+    }
+  }
+
+  moveLeft() {
+    if (snake.direction != 'right') {
+      snake.direction = 'left'
+    }
+  }
+
+  moveRight() {
+    if (snake.direction != 'left') {
+      snake.direction = 'right'
     }
   }
 }

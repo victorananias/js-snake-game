@@ -1,6 +1,8 @@
+"use strict"
+
 const $ = document.querySelector.bind(document);
 
-const MOVE_LEFT = 'a';
+const MOVE_LEFT = 'a',
   MOVE_RIGHT = 'd',
   MOVE_UP = 'w',
   MOVE_DOWN = 's',
@@ -16,7 +18,6 @@ let lastTime = new Date().getTime()
 
 let isGameOver = false
 let isPaused = false
-
 
 const canvas = $('#game')
 const context = canvas.getContext('2d')

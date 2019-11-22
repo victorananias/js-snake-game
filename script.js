@@ -52,22 +52,21 @@ function animate() {
     return
   }
 
-  context.clearRect(0, 0, canvas.width, canvas.size)
-  context.fillStyle = '#3a3a3a'
-  context.fillRect(0, 0, canvas.width, canvas.height)
-
   let now = new Date().getTime()
 
   if (now - lastTime > SPEED ) {
     snake.update()
     lastTime = now
   }
-
-  snake.draw(context)
-  fruit.draw(context)
   
   collisor.check()
 
+  context.clearRect(0, 0, canvas.width, canvas.size)
+  context.fillStyle = '#3a3a3a'
+  context.fillRect(0, 0, canvas.width, canvas.height)
+
+  snake.draw(context)
+  fruit.draw(context)
 
   requestAnimationFrame(animate)
 }
@@ -96,4 +95,5 @@ function gameOver() {
   isGameOver = true
   const gameOver = $('#game-over')
   gameOver.style.webkitAnimationPlayState = 'running'
+  throw new Error('Game Over')
 }

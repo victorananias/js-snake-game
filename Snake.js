@@ -1,18 +1,21 @@
 class Snake {
 
-  constructor(x, y, size, collisor) {
+  constructor(x, y, size, collisor, context) {
     this.direction = ''
     this.speed = 180
     this.size = size
     this.collisor = collisor
 
     this.head = new SnakePiece(x, y, this.size)
-    this.head.collidedTo = this.collidedTo.bind(this)
+    this.head.onCollision = this.onCollision.bind(this)
     this.collisor.addObject(this.head)
 
     this.pieces = []
     this.shouldGrow = false
     this.continue = true
+    this.context = context
+
+    this.lastUpdate = new Date().getTime()
   }
 
   grow(x, y) {
@@ -24,6 +27,10 @@ class Snake {
   update() {
     let x = this.head.x
     let y = this.head.y
+
+    if (!this.shouldUpdate()) {
+      return
+    }
 
     switch (this.direction) {
       case '':
@@ -67,30 +74,42 @@ class Snake {
 
   }
 
-  draw(context) {
+  draw() {
     if (!this.continue) return;
     const body = [this.head, ...this.pieces]
 
     for (let i = 0; i < body.length; i++) {
       const piece = body[i]
-      context.fillStyle = '#4bb84b'
-      context.fillRect(piece.x, piece.y, piece.size, piece.size)
+      this.context.fillStyle = '#4bb84b'
+      this.context.fillRect(piece.x, piece.y, piece.size, piece.size)
     }
   }
 
-  collidedTo(obj) {
+  onCollision(obj) {
     if (obj instanceof Fruit) {
       this.shouldGrow = true
-      //FIXME: nneed refactoring
+      //FIXME: need refactoring
       score()
     } else if (obj instanceof SnakePiece) {
-      //FIXME: nneed refactoring
+      //FIXME: need refactoring
       this.continue = false
       gameOver()
     } else if (obj instanceof ScreenLimit) {
       this.continue = false
       gameOver()
     }
+  }
+
+  shouldUpdate() {
+    const now = new Date().getTime()
+
+    if (now - this.lastUpdate <= this.speed) {
+      return false
+    }
+
+    this.lastUpdate = now
+
+    return true
   }
 
   moveDown() {

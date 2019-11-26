@@ -9,8 +9,7 @@ const MOVE_LEFT = 'a',
   PAUSE = ' ';
 
 const SIZE = 20
-
-let SPEED = 180
+const SPEED = 180
 
 let scorePoints = 0
 
@@ -21,74 +20,50 @@ let isPaused = false
 
 const canvas = $('#game')
 const context = canvas.getContext('2d')
+const pause = $('#pause')
 
+const background = new Background(context)
 const fruit = new Fruit(SIZE, context)
 const keyboard = new Keyboard()
 const collisor = new Collisor()
-const snake = new Snake(200, 200, SIZE, collisor)
-
-fruit.update()
-
-animate()
+const snake = new Snake(200, 200, SIZE, collisor, context)
+const game = new Game()
 
 collisor.addObject(new ScreenLimit(-20, 0, 20, 500))
 collisor.addObject(new ScreenLimit(501, 0, 20, 500))
 collisor.addObject(new ScreenLimit(0, -20, 500, 20))
 collisor.addObject(new ScreenLimit(0, 0, 500, 20))
-
 collisor.addObject(fruit)
 
 keyboard.onPress(MOVE_LEFT, () => snake.moveLeft())
 keyboard.onPress(MOVE_RIGHT, () => snake.moveRight())
 keyboard.onPress(MOVE_UP, () => snake.moveUp())
 keyboard.onPress(MOVE_DOWN, () => snake.moveDown())
-keyboard.onPress(PAUSE, () => togglePause())
 
-
-function animate() {
-
-  if (isPaused || isGameOver) {
-    requestAnimationFrame(animate)
+keyboard.onPress(PAUSE, () => {
+  if (game.isOver) {
     return
   }
 
-  let now = new Date().getTime()
-
-  if (now - lastTime > SPEED ) {
-    snake.update()
-    lastTime = now
+  if (game.isPaused) {
+    game.unpause()
+    pause.classList.add('hidden')
+  } else {
+      game.pause()
+      pause.classList.remove('hidden')
   }
-  
-  collisor.check()
+})
 
-  context.clearRect(0, 0, canvas.width, canvas.size)
-  context.fillStyle = '#3a3a3a'
-  context.fillRect(0, 0, canvas.width, canvas.height)
+game.addToDraw(background)
+game.addToDraw(snake)
+game.addToDraw(fruit)
+game.executeAfterDraw(() => collisor.check())
 
-  snake.draw(context)
-  fruit.draw(context)
-
-  requestAnimationFrame(animate)
-}
-
+game.start()
 
 function score() {
   scorePoints += 10
   $('#score #points').innerHTML = scorePoints
-}
-
-
-function togglePause() {
-  if (isGameOver) return
-
-  isPaused = !isPaused
-  const pause = $('#pause')
-
-  if (isPaused) {
-    pause.classList.remove('hidden')
-  } else {
-    pause.classList.add('hidden')
-  }
 }
 
 function gameOver() {

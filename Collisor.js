@@ -51,12 +51,12 @@ class Collisor {
           continue
         }
 
-        if (obj1.collidedTo) {
-          obj1.collidedTo(obj2)
+        if (obj1.onCollision) {
+          obj1.onCollision(obj2)
         }
 
-        if (obj2.collidedTo) {
-          obj2.collidedTo(obj1)
+        if (obj2.onCollision) {
+          obj2.onCollision(obj1)
         }
 
         return

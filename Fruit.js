@@ -4,11 +4,18 @@ class Fruit {
     this.y = -200
     this.size = size
     this.context = context
+    this.shouldUpdate = true
+    this.update()
   }
 
   update() {
-    this.x = Math.floor(Math.random() * (500 / this.size)) * this.size;
-    this.y = Math.floor(Math.random() * (500 / this.size)) * this.size;
+    if (!this.shouldUpdate) {
+      return
+    }
+
+    this.shouldUpdate = false
+    this.x = Math.floor(Math.random() * (500 / this.size)) * this.size
+    this.y = Math.floor(Math.random() * (500 / this.size)) * this.size
   }
 
   draw() {
@@ -17,9 +24,8 @@ class Fruit {
     this.context.fillRect(this.x, this.y, this.size, this.size)
   }
 
-  collidedTo(obj) {
-    this.update()
-    this.draw()
+  onCollision(obj) {
+    this.shouldUpdate = true
   }
 
   hitboxes() {

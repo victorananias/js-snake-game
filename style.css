@@ -15,23 +15,6 @@ body,
   width: 100%;
 }
 
-:root {
-  --main-size: 15px;
-  --game-size: 460px;
-  --snake-color: #c54c4c;
-  --point-color: #4bb84b;
-}
-
-@media (min-width: 600px) 
-{
-  :root {
-    --main-size: 20px;
-    --game-size: 500px;
-    --snake-color: #c54c4c;
-    --point-color: #4bb84b;
-  }
-}
-
 body {
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   -webkit-font-smothing: antialised !important;
@@ -53,14 +36,15 @@ body {
   position: relative;
 }
 
-#score, #instructions {
+#score,
+#instructions {
   width: var(--game-size);
 }
 
 #game {
   width: 100%;
   height: 100%;
-  background-color: #3a3a3a;
+  border: 1px solid #3a3a3a;
   position: relative;
   overflow: hidden;
 }
@@ -105,28 +89,4 @@ body {
   to {
     top: 50%;
   }
-}
-
-.snake-part {
-  background-color: var(--snake-color);
-  width: var(--main-size);
-  height: var(--main-size);
-  border-radius: 0.2rem;
-  position: absolute;
-  left: calc(var(--main-size) * 4);
-  top: calc(var(--main-size) * 4);
-}
-
-.point {
-  width: var(--main-size);
-  height: var(--main-size);
-  position: absolute;
-}
-
-.point .point-content {
-  border-radius: 20%;
-  background-color: var(--point-color);
-  position: absolute;
-  width: 50%;
-  height: 50%;
 }

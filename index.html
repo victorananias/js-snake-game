@@ -17,20 +17,15 @@
     </div>
 
     <div class="container">
-      <div id="game">
 
-        <div class="point flex-center">
-          <div class="point-content"></div>
-        </div>
-
-        <div class="snake-part"></div>
-      </div>
+      <!--  CANVAS  -->
+      <canvas id="game" width="500" height="500"></canvas>
 
       <div id="game-over" class="flex-center">
         <div class="text-center">
           GAME OVER
           <br>
-          <a onclick="reload()">
+          <a onclick="location.reload()">
             Play again?
           </a>
         </div>
@@ -54,6 +49,14 @@
     
   </div>
 
+  <script src="Game.js"></script>
+  <script src="Collisor.js"></script>
+  <script src="Keyboard.js"></script>
+  <script src="ScreenLimit.js"></script>
+  <script src="Background.js"></script>
+  <script src="Fruit.js"></script>
+  <script src="SnakePiece.js"></script>
+  <script src="Snake.js"></script>
   <script src="script.js"></script>
 </body>
 

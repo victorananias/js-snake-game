@@ -13,11 +13,6 @@ const SPEED = 180
 
 let scorePoints = 0
 
-let lastTime = new Date().getTime()
-
-let isGameOver = false
-let isPaused = false
-
 const canvas = $('#game')
 const context = canvas.getContext('2d')
 const pause = $('#pause')
@@ -35,6 +30,10 @@ collisor.addObject(new ScreenLimit(0, -20, 500, 20))
 collisor.addObject(new ScreenLimit(0, 0, 500, 20))
 collisor.addObject(fruit)
 
+collisor.whenCollide([ScreenLimit.name, SnakePiece.name], gameOver)
+collisor.whenCollide([SnakePiece.name, SnakePiece.name], gameOver)
+collisor.whenCollide([SnakePiece.name, Fruit.name], score)
+
 keyboard.onPress(MOVE_LEFT, () => snake.moveLeft())
 keyboard.onPress(MOVE_RIGHT, () => snake.moveRight())
 keyboard.onPress(MOVE_UP, () => snake.moveUp())
@@ -49,8 +48,8 @@ keyboard.onPress(PAUSE, () => {
     game.unpause()
     pause.classList.add('hidden')
   } else {
-      game.pause()
-      pause.classList.remove('hidden')
+    game.pause()
+    pause.classList.remove('hidden')
   }
 })
 
@@ -67,8 +66,7 @@ function score() {
 }
 
 function gameOver() {
-  isGameOver = true
   const gameOver = $('#game-over')
   gameOver.style.webkitAnimationPlayState = 'running'
-  throw new Error('Game Over')
+  game.over()
 }

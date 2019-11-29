@@ -88,15 +88,10 @@ class Snake {
   onCollision(obj) {
     if (obj instanceof Fruit) {
       this.shouldGrow = true
-      //FIXME: need refactoring
-      score()
     } else if (obj instanceof SnakePiece) {
-      //FIXME: need refactoring
       this.continue = false
-      gameOver()
     } else if (obj instanceof ScreenLimit) {
       this.continue = false
-      gameOver()
     }
   }
 

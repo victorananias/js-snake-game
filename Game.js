@@ -43,12 +43,12 @@ class Game {
   unpause() {
     this.state = 'running'
   }
-
-  get isOver() {
-    return this.state == 'over' 
-  }
   
   get isPaused() {
     return this.state == 'paused' 
+  }
+
+  over() {
+    throw new Error('Game Over')
   }
 }

@@ -1,10 +1,15 @@
 class Collisor {
   constructor() {
     this.objects = []
+    this.events = []
   }
 
   addObject(object) {
     this.objects.push(object)
+  }
+
+  whenCollide(objects, action) {
+    this.events.push({ objects, action })
   }
 
   check() {
@@ -59,6 +64,8 @@ class Collisor {
           obj2.onCollision(obj1)
         }
 
+        this.callEvents(obj1, obj2)
+
         return
       }
     }
@@ -69,5 +76,16 @@ class Collisor {
       hitbox1.x < (hitbox2.x + hitbox2.width) &&
       (hitbox1.y + hitbox1.height) > hitbox2.y &&
       hitbox1.y < (hitbox2.y + hitbox2.height)
+  }
+
+  callEvents(obj1, obj2) {
+    this.events.forEach(e => {
+      if (
+        (e.objects[0] == obj1.constructor.name && e.objects[1] == obj2.constructor.name)
+        || (e.objects[0] == obj2.constructor.name && e.objects[1] == obj1.constructor.name)
+      ) {
+        e.action()
+      }
+    })
   }
 }

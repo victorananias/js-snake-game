@@ -1,3 +1,3 @@
 # Snake Game
 
-Snake game made with HTML and JavaScript. No Canvas used.
+Snake game made with HTML Canvas and JavaScript.

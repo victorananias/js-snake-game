@@ -1,5 +1,18 @@
 "use strict"
 
+var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/gamehub").build();
+
+connection.start().then(function () {
+  console.log('connected')
+}).catch(function (err) {
+    return console.error(err.toString());
+});
+
+connection.on("MoveTo", function (pos) {
+  console.log("move")
+  snake[pos]()
+});
+
 const $ = document.querySelector.bind(document);
 
 const MOVE_LEFT = 'a',
@@ -34,10 +47,28 @@ collisor.whenCollide([ScreenLimit.name, SnakePiece.name], gameOver)
 collisor.whenCollide([SnakePiece.name, SnakePiece.name], gameOver)
 collisor.whenCollide([SnakePiece.name, Fruit.name], score)
 
-keyboard.onPress(MOVE_LEFT, () => snake.moveLeft())
-keyboard.onPress(MOVE_RIGHT, () => snake.moveRight())
-keyboard.onPress(MOVE_UP, () => snake.moveUp())
-keyboard.onPress(MOVE_DOWN, () => snake.moveDown())
+keyboard.onPress(MOVE_LEFT, () => {
+  // snake.moveLeft()
+  sendMove('left')
+})
+keyboard.onPress(MOVE_RIGHT, () => {
+  // snake.moveRight()
+  sendMove('right')
+})
+keyboard.onPress(MOVE_UP, () => {
+  // snake.moveUp()
+  sendMove('up')
+})
+keyboard.onPress(MOVE_DOWN, () => {
+  // snake.moveDown()
+  sendMove('down')
+})
+
+function sendMove(pos) {
+  connection.invoke("Move", pos).catch(function (err) {
+    return console.error(err.toString());
+  });
+}
 
 keyboard.onPress(PAUSE, () => {
   if (game.isOver) {

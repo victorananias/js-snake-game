@@ -108,26 +108,18 @@ class Snake {
   }
 
   moveDown() {
-    if (this.direction != 'up') {
       this.direction = 'down'
-    }
   }
 
   moveUp() {
-    if (snake.direction != 'down') {
       snake.direction = 'up'
-    }
   }
 
   moveLeft() {
-    if (snake.direction != 'right') {
       snake.direction = 'left'
-    }
   }
 
   moveRight() {
-    if (snake.direction != 'left') {
       snake.direction = 'right'
-    }
   }
 }

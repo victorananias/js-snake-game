@@ -1,0 +1,22 @@
+{
+  "name": "js-snake-game",
+  "version": "1.0.0",
+  "description": "Snake Game",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victorananias/js-snake-game.git"
+  },
+  "author": "Victor Ananias",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/victorananias/js-snake-game/issues"
+  },
+  "homepage": "https://github.com/victorananias/js-snake-game#readme",
+  "dependencies": {
+    "@microsoft/signalr": "^3.0.1"
+  }
+}

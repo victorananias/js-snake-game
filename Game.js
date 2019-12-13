@@ -51,4 +51,8 @@ class Game {
   over() {
     throw new Error('Game Over')
   }
+
+  clear() {
+    this.objectsToDraw = []
+  }
 }

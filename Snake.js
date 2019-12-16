@@ -7,7 +7,7 @@ class Snake {
 
   // grow(x, y) {
   //   const newPiece = new SnakePiece(x, y, this.size)
-  //   this.pieces.push(newPiece)
+  //   this.body.push(newPiece)
   //   this.collisor.addObject(newPiece)
   // }
 
@@ -40,29 +40,29 @@ class Snake {
   //       break
   //   }
 
-  //   const body = [this.head, ...this.pieces]
+    // const body = [this.head, ...this.body]
 
-  //   for (let i = 0; i < body.length; i++) {
-  //     const piece = body[i]
+    // for (let i = 0; i < body.length; i++) {
+    //   const piece = body[i]
 
-  //     let oldX = piece.x
-  //     let oldY = piece.y
+    //   let oldX = piece.x
+    //   let oldY = piece.y
 
-  //     piece.move(x, y)
+    //   piece.move(x, y)
 
-  //     x = oldX
-  //     y = oldY
-  //   }
+    //   x = oldX
+    //   y = oldY
+    // }
 
-  //   if (this.shouldGrow) {
-  //     this.grow(x, y)
-  //     this.shouldGrow = false
-  //   }
+    // if (this.shouldGrow) {
+    //   this.grow(x, y)
+    //   this.shouldGrow = false
+    // }
 
   // }
 
   draw() {
-    const body = [this.head, ...this.pieces]
+    const body = [this.head, ...this.body]
     
     for (let i = 0; i < body.length; i++) {
       const piece = body[i]

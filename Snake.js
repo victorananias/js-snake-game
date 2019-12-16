@@ -1,20 +1,8 @@
 class Snake {
 
-  constructor(x, y, size, collisor, context) {
-    this.direction = ''
-    this.size = size
-    this.collisor = collisor
-
-    this.head = new SnakePiece(x, y, this.size)
-    this.head.onCollision = this.onCollision.bind(this)
-    this.collisor.addObject(this.head)
-
-    this.pieces = []
-    this.shouldGrow = false
-    this.continue = true
+  constructor(snake, context) {
+    Object.assign(this, snake)
     this.context = context
-
-    this.lastUpdate = new Date().getTime()
   }
 
   // grow(x, y) {
@@ -74,9 +62,8 @@ class Snake {
   // }
 
   draw() {
-    if (!this.continue) return;
     const body = [this.head, ...this.pieces]
-
+    
     for (let i = 0; i < body.length; i++) {
       const piece = body[i]
       this.context.fillStyle = '#4bb84b'
@@ -84,41 +71,41 @@ class Snake {
     }
   }
 
-  onCollision(obj) {
-    if (obj instanceof Fruit) {
-      this.shouldGrow = true
-    } else if (obj instanceof SnakePiece) {
-      this.continue = false
-    } else if (obj instanceof ScreenLimit) {
-      this.continue = false
-    }
-  }
+  // onCollision(obj) {
+  //   if (obj instanceof Fruit) {
+  //     this.shouldGrow = true
+  //   } else if (obj instanceof SnakePiece) {
+  //     this.continue = false
+  //   } else if (obj instanceof ScreenLimit) {
+  //     this.continue = false
+  //   }
+  // }
 
-  shouldUpdate() {
-    const now = new Date().getTime()
+  // shouldUpdate() {
+  //   const now = new Date().getTime()
 
-    if (now - this.lastUpdate <= this.speed) {
-      return false
-    }
+  //   if (now - this.lastUpdate <= this.speed) {
+  //     return false
+  //   }
 
-    this.lastUpdate = now
+  //   this.lastUpdate = now
 
-    return true
-  }
+  //   return true
+  // }
 
-  moveDown() {
-      this.direction = 'down'
-  }
+  // moveDown() {
+  //     this.direction = 'down'
+  // }
 
-  moveUp() {
-      snake.direction = 'up'
-  }
+  // moveUp() {
+  //     snake.direction = 'up'
+  // }
 
-  moveLeft() {
-      snake.direction = 'left'
-  }
+  // moveLeft() {
+  //     snake.direction = 'left'
+  // }
 
-  moveRight() {
-      snake.direction = 'right'
-  }
+  // moveRight() {
+  //     snake.direction = 'right'
+  // }
 }

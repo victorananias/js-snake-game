@@ -1,6 +1,5 @@
 "use strict"
 
-
 const $ = document.querySelector.bind(document);
 
 const MOVE_LEFT = 'a',
@@ -36,22 +35,16 @@ connection.start()
 connection.on("UpdateGameState", (state) => {
   context.clearRect(0, 0, 500, 500)
 
-  // background.draw()
+  background.draw()
 
   state.snakes.forEach(s => {
-    if (s.head.x == 500) {
-      const now = new Date().getTime()
-      console.log((now - lastUpdate) / 1000)
-      lastUpdate = now
-    }
-    
     const snake = new Snake(s, context)
-    // snake.draw()
+    snake.draw()
   })
 
   state.fruits.forEach(f => {
     const fruit = new Fruit(f, context)
-    // fruit.draw()
+    fruit.draw()
   })
 })
 

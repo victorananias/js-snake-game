@@ -1,6 +1,5 @@
 "use strict"
 
-
 const $ = document.querySelector.bind(document);
 
 const MOVE_LEFT = 'a',
@@ -45,6 +44,7 @@ connection.on("UpdateView", (state) => {
     if (snake.id != connection.connectionId) {
       snake.color = 'yellow';
     }
+    
     snake.draw()
   })
 

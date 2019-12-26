@@ -28,30 +28,29 @@ let lastUpdate = new Date().getTime()
 
 connection.start()
 .then(function () {
+  console.log(connection)
   console.log('connected')
 }).catch(function (err) {
     return console.error(err.toString());
 })
 
-connection.on("UpdateGameState", (state) => {
+connection.on("UpdateView", (state) => {
   context.clearRect(0, 0, 500, 500)
 
-  // background.draw()
+  background.draw()
 
   state.snakes.forEach(s => {
-    if (s.head.x == 500) {
-      const now = new Date().getTime()
-      console.log((now - lastUpdate) / 1000)
-      lastUpdate = now
-    }
-    
     const snake = new Snake(s, context)
-    // snake.draw()
+
+    if (snake.id != connection.connectionId) {
+      snake.color = 'yellow';
+    }
+    snake.draw()
   })
 
   state.fruits.forEach(f => {
     const fruit = new Fruit(f, context)
-    // fruit.draw()
+    fruit.draw()
   })
 })
 

@@ -65,29 +65,44 @@ connection.on("UpdateView", (state) => {
 // collisor.whenCollide([SnakePiece.name, Fruit.name], score)
 
 keyboard.onPress(MOVE_LEFT, () => {
-  // snake.moveLeft()
   sendMove('left')
 })
 keyboard.onPress(MOVE_RIGHT, () => {
-  // snake.moveRight()
   sendMove('right')
 })
 keyboard.onPress(MOVE_UP, () => {
-  // snake.moveUp()
   sendMove('up')
 })
 keyboard.onPress(MOVE_DOWN, () => {
-  // snake.moveDown()
   sendMove('down')
 })
 
 keyboard.onPress(PAUSE, () => {
-  // snake.moveDown()
   sendMove('')
+})
+
+
+keyboard.onRelease(MOVE_LEFT, () => {
+  reduceSpeed()
+})
+keyboard.onRelease(MOVE_RIGHT, () => {
+  reduceSpeed()
+})
+keyboard.onRelease(MOVE_UP, () => {
+  reduceSpeed()
+})
+keyboard.onRelease(MOVE_DOWN, () => {
+  reduceSpeed()
 })
 
 function sendMove(pos) {
   connection.invoke("Move", pos).catch(function (err) {
+    return console.error(err.toString());
+  });
+}
+
+function reduceSpeed() {
+  connection.invoke("ReduceSnakeSpeed").catch(function (err) {
     return console.error(err.toString());
   });
 }

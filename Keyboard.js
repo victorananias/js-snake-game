@@ -1,7 +1,8 @@
 class Keyboard {
   pressedKeys = []
   holdedKeys = []
-  shotFunctions = []
+  pressKeyActions = []
+  releaseKeyActions = []
 
   constructor() {
     document.addEventListener('keydown', this._onkeydown.bind(this))
@@ -9,20 +10,28 @@ class Keyboard {
   }
 
   onPress(key, action) {
-    this.shotFunctions[key] = action
+    this.pressKeyActions[key] = action
+  }
+
+  onRelease(key, action) {
+    this.releaseKeyActions[key] = action
   }
 
   _onkeydown({ key }) {
     this.holdedKeys[key] = true
 
-    if (this.shotFunctions[key] && !this.pressedKeys[key]) {
+    if (this.pressKeyActions[key] && !this.pressedKeys[key]) {
       this.pressedKeys[key] = true
-      this.shotFunctions[key]()
+      this.pressKeyActions[key]()
     }
   }
 
   _onkeyup({ key }) {
     this.pressedKeys[key] = false
     this.holdedKeys[key] = false
+
+    if (this.releaseKeyActions[key]) {
+      this.releaseKeyActions[key]()
+    }
   }
 }

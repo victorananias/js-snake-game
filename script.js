@@ -25,9 +25,10 @@ const connection = new signalR.HubConnectionBuilder().withUrl("https://localhost
 
 let lastUpdate = new Date().getTime()
 
+let scoreList = [];
+
 connection.start()
 .then(function () {
-  console.log(connection)
   console.log('connected')
 }).catch(function (err) {
     return console.error(err.toString());
@@ -52,7 +53,27 @@ connection.on("UpdateView", (state) => {
     const fruit = new Fruit(f, context)
     fruit.draw()
   })
+
+  if (JSON.stringify(scoreList) != JSON.stringify(state.scoreList)) {
+    scoreList = state.scoreList
+    updateScore()
+  }
 })
+
+
+function updateScore() {
+  console.log(document.querySelectorAll('#score tr'));
+  [...document.querySelectorAll('#score tbody tr')].forEach(e => e.remove())
+
+  scoreList.forEach(s => {
+    $('#score').innerHTML += `
+      <tr class="${s.playerId == connection.connectionId ? 'score-current-player ' : ''}">
+        <td>${s.playerId}</td>
+        <td>${s.points}</td>
+      </tr>
+    `
+  })
+}
 
 // collisor.addObject(new ScreenLimit(-20, 0, 20, 500))
 // collisor.addObject(new ScreenLimit(501, 0, 20, 500))

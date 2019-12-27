@@ -6,47 +6,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Snake Game</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div id="root" class="flex-center">
-
-    <!-- <div id="score">
-      SCORE: <span id="points">0</span>
-    </div> -->
-
-    <div class="container">
-
-      <!--  CANVAS  -->
+  <div class="flex-center">
+    <div class="game-container">
       <canvas id="game" width="500" height="500"></canvas>
-
-      <div id="game-over" class="flex-center">
-        <div class="text-center">
-          GAME OVER
-          <br>
-          <a onclick="location.reload()">
-            Play again?
-          </a>
-        </div>
-      </div>
-
-      <div id="pause" class="flex-center hidden">
-        <div class="text-center">
-          PAUSE
-        </div>
-      </div>
     </div>
 
-    <!-- <div id="instructions">
-      <p>
-        Use <strong>W</strong> <strong>A</strong> <strong>S</strong> <strong>D</strong> to move. Press
-        <strong>SPACE</strong> to pause.</p>
-      <p>
-        <strong>Move</strong> to <strong>start</strong> the game.
-      </p>
-    </div> -->
-    
+    <div class="info-container">
+      <table id="score">
+        <thead>
+          <tr>
+            <th colspan="2">
+              Scores
+            </th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </div>
 
   <script src="node_modules/@microsoft/signalr/dist/browser/signalr.min.js"></script>

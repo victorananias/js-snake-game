@@ -6,6 +6,8 @@
   padding: 0;
   outline: 0;
   box-sizing: border-box;
+  list-style-type: none;
+  text-decoration: none;
 }
 
 html,
@@ -13,80 +15,47 @@ body,
 #root {
   height: 100%;
   width: 100%;
-}
-
-body {
+  background-color: #2e2c2c;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   -webkit-font-smothing: antialised !important;
 }
 
 .flex-center {
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
-#root {
-  flex-direction: column;
+.game-container {
+  width: 500px;
+  height: 500px;
+  margin-top: 50px;
 }
 
-.container {
-  width: var(--game-size);
-  height: var(--game-size);
-  position: relative;
+table {
+  margin-top: 50px;
+  margin-left: 50px;
+  width: 250px;
 }
 
-#score,
-#instructions {
-  width: var(--game-size);
+table th {
+  text-align: left;
+} 
+
+table td:first-child {
+  text-align: left;
+}
+
+table td:last-child {
+  text-align: right;
+}
+
+.score-current-player {
+  color: #4bb84b;
 }
 
 #game {
-  width: 100%;
-  height: 100%;
-  /* border: 1px solid #3a3a3a; */
-  position: relative;
   overflow: hidden;
-}
-
-#pause,
-#game-over {
-  left: 0;
-  top: 0;
-  position: absolute;
-
-  width: 100%;
-  height: 100%;
-  opacity: 0.5;
-  z-index: 99;
-  background-color: black;
-  color: white;
-}
-
-.text-center {
-  width: 100%;
-  text-align: center;
-}
-
-#game-over a {
-  color: red;
-  cursor: pointer;
-}
-
-#game-over {
-  animation: 0.2s animation1 ease;
-  animation-play-state: paused;
-}
-
-.hidden {
-  display: none;
-}
-
-@keyframes animation1 {
-  from {
-    top: -200%;
-  }
-  to {
-    top: 50%;
-  }
+  -webkit-box-shadow: 2px 3px 5px 6px rgba(0, 0, 0, 0.59);
+  -moz-box-shadow: 2px 3px 5px 6px rgba(0, 0, 0, 0.59);
+  box-shadow: 2px 3px 5px 6px rgba(0, 0, 0, 0.59);
 }

@@ -6,7 +6,7 @@ class Background {
   update() { }
 
   draw() {
-    this.context.fillStyle = '#3a3a3a'
+    this.context.fillStyle = '#2e2c2c'
     this.context.fillRect(0, 0, 500, 500)
   }
 }

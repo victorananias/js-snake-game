@@ -56,7 +56,7 @@ keyboard.onPress(PAUSE, () => {
 game.addToDraw(background)
 game.addToDraw(snake)
 game.addToDraw(fruit)
-game.executeAfterDraw(() => collisor.check())
+game.executeBeforeDraw(() => collisor.check())
 
 game.start()
 

@@ -24,10 +24,10 @@ const collisor = new Collisor()
 const snake = new Snake(200, 200, SIZE, collisor, context)
 const game = new Game()
 
-collisor.addObject(new ScreenLimit(-20, 0, 20, 500))
-collisor.addObject(new ScreenLimit(501, 0, 20, 500))
 collisor.addObject(new ScreenLimit(0, -20, 500, 20))
-collisor.addObject(new ScreenLimit(0, 0, 500, 20))
+collisor.addObject(new ScreenLimit(500, 0, 20, 500))
+collisor.addObject(new ScreenLimit(-20, 0, 20, 500))
+collisor.addObject(new ScreenLimit(0, 500, 500, 20))
 collisor.addObject(fruit)
 
 collisor.whenCollide([ScreenLimit.name, SnakePiece.name], gameOver)
